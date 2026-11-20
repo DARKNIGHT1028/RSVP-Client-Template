@@ -404,7 +404,7 @@ sheet.addEventListener("click",e=>{if(e.target===sheet)show(false)});
 $("dMap").addEventListener("click",()=>{pauseAuto();document.querySelector(".info").scrollIntoView({behavior:"smooth",block:"center"})});
 function ch(v){sel=v;$("by").classList.toggle("sel",v==="Hadir");$("bn").classList.toggle("sel",v==="Tidak hadir")}
 $("by").addEventListener("click",()=>ch("Hadir"));$("bn").addEventListener("click",()=>ch("Tidak hadir"));
-const RSVP_API="https://script.google.com/macros/s/AKfycbwFumlUTv1nNac8D_m4uqK5zWJXxF16HdKi5yQIkIgHqQvQmd7IHxsB4luzkVk8QfkH/exec";
+const RSVP_API="https://script.google.com/macros/s/AKfycbxQcOfxRWF6QBShIXp7Z8BIiKH8DzECoAgL6EPZwrBKEi8NWePiOxXD5-BbB6kkyDs3/exec";
 let rsvpSending=false;
 $("go").addEventListener("click",()=>{
   if(!RSVP_API.startsWith("https://script.google.com/macros/s/")){
