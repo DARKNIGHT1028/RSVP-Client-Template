@@ -22,7 +22,7 @@ function sheet_() {
 
 function output_(data, callback) {
   const json = JSON.stringify(data);
-  if (callback && /^[A-Za-z_$][0-9A-Za-z_$\\.]*$/.test(callback)) {
+  if (callback && /^[A-Za-z_$][0-9A-Za-z_$.]*$/.test(callback)) {
     return ContentService.createTextOutput(callback + '(' + json + ');')
       .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
@@ -32,7 +32,7 @@ function output_(data, callback) {
 
 function safe_(value) {
   const s = String(value || '');
-  return /^[=+\\-@]/.test(s) ? "'" + s : s;
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 
 /** GET handles JSONP requests from GitHub Pages. Actions: health, rsvp, list, delete. */
@@ -76,7 +76,7 @@ function doGet(e) {
         const sh = sheet_();
         const n = Math.max(0, sh.getLastRow() - 1);
         const ids = n ? sh.getRange(2, 4, n, 1).getValues().map(r => String(r[0])) : [];
-        const m = /^row(\\d+)$/.exec(id);
+        const m = /^row(\d+)$/.exec(id);
         if (m) { const rowNumber = Number(m[1]); if (rowNumber >= 2 && rowNumber <= sh.getLastRow()) sh.deleteRow(rowNumber); }
         else { const idx = ids.indexOf(id); if (idx >= 0) sh.deleteRow(idx + 2); }
       } finally { lock.releaseLock(); }
@@ -104,7 +104,7 @@ function doPost(e) {
       const id = String(b.id || '');
       const n = Math.max(0, sh.getLastRow() - 1);
       const ids = n ? sh.getRange(2, 4, n, 1).getValues().map(r => String(r[0])) : [];
-      const m = /^row(\\d+)$/.exec(id);
+        const m = /^row(\d+)$/.exec(id);
       if (m) { const rowNumber = Number(m[1]); if (rowNumber >= 2 && rowNumber <= sh.getLastRow()) sh.deleteRow(rowNumber); }
       else { const idx = ids.indexOf(id); if (idx >= 0) sh.deleteRow(idx + 2); }
       return output_({ok:true});
