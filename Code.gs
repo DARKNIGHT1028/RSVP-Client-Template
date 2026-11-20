@@ -7,7 +7,7 @@ const SHEET_ID = '1aLM34s3qc0xHtS4gi2TbF48j908uDJVTFbjlw7x8ik8';
 function adminKey_() {
   return PropertiesService.getScriptProperties().getProperty('ADMIN_KEY') || '';
 }
-const TAB = 'RSVP';
+const TAB = 'Client RSVP';
 const HEAD = ['Timestamp', 'Nama Tetamu', 'Kehadiran', 'ID'];
 
 function sheet_() {
@@ -40,6 +40,9 @@ function doGet(e) {
   const p = (e && e.parameter) || {};
   const cb = p.callback || '';
   try {
+    if (p.action === 'health') {
+      return output_({ok:true, message:'RSVP template API is running.'}, cb);
+    }
     if (p.action === 'rsvp') {
       const name = String(p.name || '').trim().slice(0, 80);
       const status = String(p.status || '');
