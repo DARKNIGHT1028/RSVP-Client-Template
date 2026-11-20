@@ -407,6 +407,10 @@ $("by").addEventListener("click",()=>ch("Hadir"));$("bn").addEventListener("clic
 const RSVP_API="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 let rsvpSending=false;
 $("go").addEventListener("click",()=>{
+  if(!RSVP_API.startsWith("https://script.google.com/macros/s/")){
+    $("msg").textContent="Template setup required: connect your own Google Apps Script URL before accepting RSVPs.";
+    return;
+  }
   const name=$("nm").value.trim();
   if(!name||!sel){
     $("msg").textContent="Sila isi nama dan pilih kehadiran.";
