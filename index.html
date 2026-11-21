@@ -166,12 +166,16 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 .rv.in{opacity:1;transform:none}
 
 /* accessible reader controls */
-.reader-tools{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:11;width:min(100%,480px);display:none;align-items:center;justify-content:center;gap:8px;padding:7px 10px;pointer-events:none}
-.reader-tools.show{display:flex}
-.reader-tools button{pointer-events:auto;min-height:42px;min-width:44px;border:1px solid var(--gold);border-radius:99px;background:rgba(255,247,251,.97);color:var(--wine);font-size:12px;font-weight:700;padding:8px 13px;box-shadow:0 3px 12px #8e135622;touch-action:manipulation}
-.reader-tools #scrollToggle{min-width:128px}
+.reader-tools{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:12;width:min(calc(100% - 24px),440px);display:none;align-items:center;justify-content:center;gap:9px;padding:12px 46px 12px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,247,251,.98);box-shadow:0 8px 28px rgba(110,10,64,.18)}
+.reader-tools.open{display:flex}
+.reader-tools button{min-height:44px;min-width:48px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--wine);font-size:13px;font-weight:700;padding:9px 14px;touch-action:manipulation}
+.reader-tools #scrollToggle{min-width:132px}
+.reader-tools #readerClose{position:absolute;right:7px;top:7px;min-width:34px;width:34px;height:34px;min-height:34px;padding:0;border:0;background:transparent;font-size:22px;box-shadow:none}
 .reader-tools button:active,.dock button:active,.strip:active{transform:scale(.97)}
 .reader-tools button[aria-pressed="true"]{background:var(--wine);color:#fff;border-color:var(--wine)}
+.dock .dtab{top:-25px;width:64px;height:26px;border-radius:12px 12px 0 0;background:rgba(255,247,251,.96);border:1px solid var(--line);border-bottom:0;color:var(--wine);font:700 12px "DM Sans";letter-spacing:.04em}
+.dock .dtab::before{content:none}
+.dock .dtab::after{content:"Aa";}
 .dock button:not(.dtab){min-height:48px;min-width:0;padding:5px 2px;gap:4px;touch-action:manipulation}
 .dock em{font-size:20px}
 .dock button span{overflow-wrap:anywhere}
@@ -185,13 +189,13 @@ button,a{ -webkit-tap-highlight-color:transparent }
 .wlist div,.wl2 div{font-size:calc(14px * var(--reading-scale))}
 .wlist b,.wl2 b{font-size:calc(18px * var(--reading-scale))}
 @media(min-width:600px){
-  .reader-tools{gap:10px;padding:9px 14px}
-  .reader-tools button{min-height:46px;padding:9px 16px;font-size:13px}
+  .reader-tools{gap:10px;padding:14px 48px 14px 14px}
+  .reader-tools button{min-height:48px;padding:10px 17px;font-size:14px}
   .dock button:not(.dtab){min-height:54px;font-size:13px}
 }
 @media(max-width:360px){
-  .reader-tools{gap:5px;padding-left:6px;padding-right:6px}
-  .reader-tools button{min-width:42px;padding:7px 10px;font-size:11px}
+  .reader-tools{gap:5px;padding:10px 42px 10px 8px}
+  .reader-tools button{min-width:42px;padding:8px 10px;font-size:11px}
   .reader-tools #scrollToggle{min-width:112px}
   .dock button:not(.dtab){font-size:10px}
 }
@@ -206,7 +210,6 @@ button,a{ -webkit-tap-highlight-color:transparent }
 .dock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);z-index:10;display:none;grid-template-columns:repeat(5,1fr);padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,247,251,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s}
 .dock.show{display:grid}
 .dock.hide{transform:translate(-50%,calc(100% + 24px));visibility:hidden;transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s}
-.reader-tools.hide{transform:translate(-50%,calc(100% + 24px));visibility:hidden;transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s}
 .dock button:not(.dtab){display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--wine);font-size:12px;font-weight:700;cursor:pointer;padding:4px 6px;text-align:center;line-height:1.2;justify-content:flex-start}
 .dock em{font-style:normal;font-size:18px}
 .dock .dtab{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:84px;height:28px;padding:0;background:none;border:0}
@@ -521,14 +524,15 @@ section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
 
 <div class="swipe" id="swipe" aria-hidden="true"><i></i><i></i><span>Leret ke atas</span></div>
 
-<div class="reader-tools" id="readerTools" aria-label="Kawalan bacaan">
+<div class="reader-tools" id="readerTools" role="group" aria-label="Kawalan bacaan">
   <button type="button" id="scrollToggle" aria-pressed="false">Auto scroll: ON</button>
   <button type="button" id="textDown" aria-label="Kecilkan saiz teks">A−</button>
   <button type="button" id="textUp" aria-label="Besarkan saiz teks">A+</button>
+  <button type="button" id="readerClose" aria-label="Tutup kawalan bacaan">×</button>
 </div>
 
 <nav class="dock" id="dock">
-  <button type="button" class="dtab" id="dTab" aria-label="Sembunyi menu"></button>
+  <button type="button" class="dtab" id="dTab" aria-label="Buka kawalan bacaan" aria-expanded="false"></button>
   <button type="button" id="dRsvp"><em><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></em>RSVP</button>
   <button type="button" id="dMap"><em><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></em>Lokasi</button>
   <button type="button" id="dWish"><em><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></em>Ucapan</button>
@@ -676,7 +680,7 @@ function openInv(){
   $("cover").classList.add("opening");const ps=$("pstage");setTimeout(()=>ps.classList.add("play"),1000);
   $("open").disabled=true;$("open").textContent="Jemputan dibuka";
   bg.volume=.45;if(MUSIC_SRC)bg.play().catch(()=>{});upd();
-  setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("readerTools").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
+  setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
   if(!reduce)for(let i=0;i<14;i++){const p=document.createElement("span");p.className="petal";p.innerHTML=FP;p.style.left=Math.random()*100+"vw";p.style.fontSize=(10+Math.random()*12)+"px";p.style.setProperty("--dr",(Math.random()*140-70)+"px");p.style.animationDuration=(7+Math.random()*7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),15000)}
 }
 
@@ -694,6 +698,14 @@ $("scrollToggle").addEventListener("click",()=>{
   else{fin=false;setAuto(true)}
   syncReaderTools();
 });
+function toggleReaderTools(open){
+  const panel=$("readerTools"),trigger=$("dTab");
+  panel.classList.toggle("open",open);
+  trigger.setAttribute("aria-expanded",String(open));
+  trigger.setAttribute("aria-label",open?"Tutup kawalan bacaan":"Buka kawalan bacaan");
+}
+$("dTab").addEventListener("click",()=>toggleReaderTools(!$("readerTools").classList.contains("open")));
+$("readerClose").addEventListener("click",()=>toggleReaderTools(false));
 let readingScale=1;
 function applyReadingScale(){document.documentElement.style.setProperty("--reading-scale",String(readingScale))}
 $("textDown").addEventListener("click",()=>{readingScale=Math.max(.85,Math.round((readingScale-.05)*100)/100);applyReadingScale()});
@@ -730,7 +742,7 @@ addEventListener("scroll",()=>$("swipe").classList.toggle("show",opened&&(Date.n
 // dock hide / strip
 (function(){
   const dock=$("dock"),strip=$("strip"),tools=$("readerTools");let y0=null;
-  const setHide=h=>{dock.classList.toggle("hide",h);tools.classList.toggle("hide",h);strip.classList.toggle("show",h)};
+  const setHide=h=>{dock.classList.toggle("hide",h);toggleReaderTools(false);strip.classList.toggle("show",h)};
   $("dTab").addEventListener("click",()=>setHide(true));
   dock.addEventListener("touchstart",e=>{y0=e.touches[0].clientY},{passive:true});
   dock.addEventListener("touchend",e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>28)setHide(true);y0=null},{passive:true});
