@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>RSVP Guest List - Juliza &amp; Rugasan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--page:#f1cfe0;--panel:#fdeef5;--card:#fff8fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0;--hair:#e6cf9f}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"DM Sans",sans-serif;padding:27px 63px;min-height:100dvh}
+button,input{font:inherit}
+.hidden{display:none!important}
+:focus-visible{outline:3px solid var(--dusty);outline-offset:3px}
+.panel{position:relative;max-width:1224px;margin:0 auto;min-height:calc(100dvh - 54px);background:var(--panel);box-shadow:0 0 60px #8e135626;padding:58px 44px 54px;text-align:center}
+.panel:before,.panel:after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold)}
+.panel:before{inset:16px}
+.panel:after{inset:22px;border-color:var(--hair)}
+.panel>*{position:relative;z-index:1}
+
+.script{font:400 clamp(40px,7vw,52px)/1.2 "Parisienne",cursive;color:var(--dusty);margin:0}
+h1{font:500 clamp(40px,8vw,62px)/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:4px 0 12px}
+.sub{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+.orn{color:var(--gold);font-size:20px;letter-spacing:.9em;margin:30px 0 26px;padding-left:.9em}
+.foot{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b08aa0;margin-top:34px}
+
+/* login */
+.box{max-width:576px;margin:0 auto;padding:26px;text-align:left;background:var(--card);border:1px solid var(--hair);border-radius:24px;box-shadow:0 14px 34px #8e135618}
+.box label{display:block;font-size:14px;font-weight:700;color:var(--wine);margin-bottom:10px}
+.row{display:flex;gap:10px}
+input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;width:100%;border:1px solid var(--hair);border-radius:16px;padding:15px 18px;font-size:17px;background:#fffdfe;color:var(--ink)}
+.out{background:#fff;border:1px solid var(--gold);border-radius:99px;color:var(--wine);font-weight:700;font-size:15px;padding:12px 22px;cursor:pointer;white-space:nowrap}
+.box .out{border-radius:16px;padding:0 22px}
+.btn{margin-top:18px;border:0;border-radius:99px;padding:15px 30px;background:linear-gradient(135deg,#c2257a,#8e1356);color:#fff;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 10px 22px #8e135640}
+.btn:disabled{opacity:.6}
+.hint{font-size:14px;color:var(--muted);margin:16px 0 0}
+.msg{min-height:20px;font-size:14px;color:#b3261e;margin-top:6px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:center}
+.stats div{background:var(--card);border:1px solid var(--hair);border-radius:28px;padding:30px 8px;box-shadow:0 10px 26px #8e135612}
+.stats b{display:block;font:700 26px "Cormorant Garamond",serif;color:var(--wine);margin-bottom:6px}
+.stats span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* tab indicator */
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:440px;margin:26px auto 4px;padding:5px;background:#fff;border:1px solid var(--hair);border-radius:99px}
+.tabs .ind{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:99px;background:linear-gradient(135deg,#c2257a,#8e1356);box-shadow:0 6px 14px #8e135633;transition:transform .35s cubic-bezier(.3,.8,.3,1)}
+.tabs.w .ind{transform:translateX(100%)}
+.tabs button{position:relative;z-index:1;background:none;border:0;padding:12px 10px;border-radius:99px;font-weight:700;font-size:14px;color:var(--wine);cursor:pointer;transition:color .25s}
+.tabs button.on{color:#fff}
+.tabs i{font-style:normal;display:inline-block;min-width:22px;margin-left:6px;padding:1px 7px;border-radius:99px;font-size:12px;background:#f6d9e8;color:var(--wine)}
+.tabs button.on i{background:rgba(255,255,255,.25);color:#fff}
+
+/* toolbar */
+.tools{display:flex;gap:10px;align-items:center;margin-top:22px}
+.tools input{max-width:424px;padding:15px 18px;font-size:16px}
+.tools .sp{flex:1}
+.tools .out{padding:13px 22px;font-size:15px}
+.dl{position:relative}
+.menu{position:absolute;right:0;top:calc(100% + 6px);z-index:5;min-width:190px;background:#fff;border:1px solid var(--hair);border-radius:16px;box-shadow:0 14px 30px #8e135630;padding:6px;text-align:left}
+.menu button{display:block;width:100%;background:none;border:0;border-radius:10px;padding:10px 14px;text-align:left;font-size:14px;color:var(--wine);cursor:pointer}
+.menu button:hover{background:#fdeef5}
+.count{text-align:left;font-size:14px;color:var(--muted);margin:12px 0 10px}
+
+/* list */
+.item{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;text-align:left;background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:16px 20px;margin-bottom:10px}
+.nm{font:600 21px/1.3 "Cormorant Garamond",serif;color:var(--wine);word-break:break-word}
+.tx{font-size:15px;line-height:1.55;margin-top:3px;word-break:break-word}
+.dt{font-size:12px;color:var(--muted);margin-top:5px}
+.tag{display:inline-block;margin-top:5px;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;border:1px solid}
+.tag.y{background:#e3f5e6;color:#2f6b3f;border-color:#a9d8b5}
+.tag.n{background:#fde6e5;color:#b3261e;border-color:#f1a9a5}
+.del{flex:0 0 auto;background:#fff;border:1px solid #f1a9a5;border-radius:99px;color:#b3261e;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer}
+.del:hover{background:#fde6e5}
+.empty{max-width:544px;text-align:center;border:1px dashed var(--hair);border-radius:20px;background:var(--card);color:var(--muted);padding:34px 20px;font:italic 20px "Cormorant Garamond",serif}
+
+/* delete dialog */
+.ov{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(110,10,64,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.ov.up{opacity:1;visibility:visible}
+.dbox{width:100%;max-width:400px;background:var(--card);border:1px solid var(--gold);border-radius:24px;padding:30px 24px 24px;text-align:center;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 6px var(--hair),0 24px 50px rgba(60,0,35,.35);transform:translateY(14px) scale(.97);transition:transform .25s}
+.ov.up .dbox{transform:none}
+.dic{width:52px;height:52px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#fde6e5;border:1px solid #f1a9a5;color:#b3261e;font:700 26px "Cormorant Garamond",serif}
+.dbox h3{font:600 26px "Cormorant Garamond",serif;color:var(--wine);margin:0 0 8px}
+.dbox p{font-size:15px;line-height:1.55;color:var(--ink);margin:0;word-break:break-word}
+.dbox p b{color:var(--wine)}
+.dm{min-height:20px;font-size:13px;color:#b3261e;margin-top:10px}
+.dbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.danger{border:0;border-radius:99px;padding:13px;background:linear-gradient(135deg,#d6453d,#a8261f);color:#fff;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 18px #a8261f40}
+.danger:disabled,.dbtns .out:disabled{opacity:.6}
+
+@media(max-width:760px){
+  body{padding:0}.panel{min-height:100dvh;padding:44px 16px 44px}.panel:before{inset:10px}.panel:after{inset:15px}
+  .box{padding:20px}.orn{margin:24px 0 20px}.stats{gap:8px}.stats div{padding:20px 4px;border-radius:20px}.stats span{font-size:10px}
+  .tools{flex-wrap:wrap}.tools input{max-width:none;flex:1 0 100%}.tools .sp{display:none}.tools .out,.dl{flex:1}.dl .out{width:100%}.tools .out{padding:12px 10px;font-size:14px}
+  .item{padding:14px 16px}.empty{max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="panel">
+  <p class="script">Juliza &amp; Rugasan</p>
+  <h1>RSVP Guest List</h1>
+  <p class="sub">Admin Dashboard · Majlis Perkahwinan</p>
+  <div class="orn" aria-hidden="true">✦✧✦</div>
+
+  <form class="box" id="lf">
+    <label for="key">Admin access key</label>
+    <div class="row">
+      <input type="password" id="key" placeholder="Masukkan admin key" autocomplete="current-password" required>
+      <button type="button" class="out" id="sh">Papar</button>
+    </div>
+    <button class="btn" type="submit" id="lb">Log masuk</button>
+    <p class="hint">Masukkan admin key yang telah ditetapkan dalam Google Apps Script.</p>
+    <div class="msg" id="lm" role="status"></div>
+  </form>
+
+  <div id="app" class="hidden">
+    <div class="stats">
+      <div><b id="sT">0</b><span>Jumlah RSVP</span></div>
+      <div><b id="sY">0</b><span>Hadir</span></div>
+      <div><b id="sN">0</b><span>Tidak hadir</span></div>
+    </div>
+
+    <div class="tabs" id="tabs" role="tablist">
+      <span class="ind" aria-hidden="true"></span>
+      <button type="button" id="tR" class="on" role="tab" aria-selected="true">Senarai Tetamu<i id="cR">0</i></button>
+      <button type="button" id="tW" role="tab" aria-selected="false">Senarai Ucapan<i id="cW">0</i></button>
+    </div>
+
+    <div class="tools">
+      <input type="search" id="q" placeholder="Cari nama tetamu..." aria-label="Cari">
+      <span class="sp"></span>
+      <div class="dl">
+        <button type="button" class="out" id="dl" aria-haspopup="true" aria-expanded="false">Muat turun ▾</button>
+        <div class="menu hidden" id="menu">
+          <button type="button" data-t="rsvp">Senarai tetamu (CSV)</button>
+          <button type="button" data-t="wish">Senarai ucapan (CSV)</button>
+        </div>
+      </div>
+      <button type="button" class="out" id="rf">Muat semula</button>
+      <button type="button" class="out" id="lo">Log keluar</button>
+    </div>
+    <div class="count" id="stat"></div>
+    <div id="list" aria-live="polite"></div>
+  </div>
+
+  <div class="foot">Juliza &amp; Rugasan · 27.12.2026</div>
+</div>
+
+<div class="ov" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dt" aria-hidden="true">
+  <div class="dbox">
+    <div class="dic" aria-hidden="true">!</div>
+    <h3 id="dt"></h3>
+    <p id="dp"></p>
+    <div class="dm" id="dm" role="status"></div>
+    <div class="dbtns">
+      <button type="button" class="out" id="dc">Batal</button>
+      <button type="button" class="danger" id="dd">Ya, padam</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+/* ===== CONFIG ===== */
+const API="";   // same Google Apps Script web-app URL as RSVP_API in the invitation
+/* ================== */
+let KEY="",tab="rsvp",data={rsvp:[],wish:[]},pending=null,busy=false;
+try{KEY=sessionStorage.getItem("jr_admin")||""}catch(e){}
+
+function jsonp(params){
+  return new Promise((ok,fail)=>{
+    const cb="cb_"+Date.now()+"_"+Math.random().toString(36).slice(2),s=document.createElement("script");let to;
+    const done=()=>{clearTimeout(to);delete window[cb];s.remove()};
+    window[cb]=r=>{done();ok(r)};
+    s.onerror=()=>{done();fail(new Error("net"))};
+    to=setTimeout(()=>{done();fail(new Error("timeout"))},15000);
+    s.src=API+"?"+new URLSearchParams(Object.assign({callback:cb,key:KEY},params)).toString();
+    document.head.appendChild(s);
+  });
+}
+const fmt=t=>t?new Date(t).toLocaleString("ms-MY",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+
+async function load(){
+  $("stat").textContent="Memuatkan...";
+  const [a,b]=await Promise.all([jsonp({action:"list"}),jsonp({action:"wish_list"})]);
+  if(a.error==="auth"||b.error==="auth")throw new Error("auth");
+  if(!a.ok||!b.ok)throw new Error("server");
+  data.rsvp=a.rows;data.wish=b.rows;render();
+}
+function render(){
+  const y=data.rsvp.filter(r=>r.status==="Hadir").length;
+  $("sT").textContent=data.rsvp.length;$("sY").textContent=y;$("sN").textContent=data.rsvp.length-y;
+  $("cR").textContent=data.rsvp.length;$("cW").textContent=data.wish.length;
+  $("q").placeholder=tab==="rsvp"?"Cari nama tetamu...":"Cari nama atau ucapan...";
+  const q=$("q").value.trim().toLowerCase(),rows=data[tab].filter(r=>!q||(r.name+" "+(r.msg||"")).toLowerCase().includes(q)),L=$("list");
+  L.innerHTML="";
+  if(!rows.length){const d=document.createElement("div");d.className="empty";d.textContent=tab==="rsvp"?"Belum ada RSVP direkodkan.":"Belum ada ucapan direkodkan.";L.appendChild(d)}
+  rows.forEach(r=>{
+    const it=document.createElement("div"),l=document.createElement("div"),nm=document.createElement("div"),dt=document.createElement("div"),bt=document.createElement("button");
+    it.className="item";nm.className="nm";nm.textContent=r.name;l.appendChild(nm);
+    if(tab==="rsvp"){const t=document.createElement("span");t.className="tag "+(r.status==="Hadir"?"y":"n");t.textContent=r.status;l.appendChild(t)}
+    else{const tx=document.createElement("div");tx.className="tx";tx.textContent=r.msg;l.appendChild(tx)}
+    dt.className="dt";dt.textContent=fmt(r.at);l.appendChild(dt);
+    bt.className="del";bt.type="button";bt.textContent="Padam";bt.addEventListener("click",()=>ask(r));
+    it.appendChild(l);it.appendChild(bt);L.appendChild(it);
+  });
+  $("stat").textContent=rows.length+" rekod dipaparkan";
+}
+
+/* tabs */
+function setTab(t){
+  tab=t;$("tabs").classList.toggle("w",t==="wish");
+  $("tR").classList.toggle("on",t==="rsvp");$("tW").classList.toggle("on",t==="wish");
+  $("tR").setAttribute("aria-selected",String(t==="rsvp"));$("tW").setAttribute("aria-selected",String(t==="wish"));
+  render();
+}
+$("tR").addEventListener("click",()=>setTab("rsvp"));
+$("tW").addEventListener("click",()=>setTab("wish"));
+$("q").addEventListener("input",render);
+
+/* delete dialog (guest + ucapan) */
+function ask(r){
+  pending={r:r,t:tab};$("dm").textContent="";
+  const g=tab==="rsvp";
+  $("dt").textContent=g?"Padam tetamu?":"Padam ucapan?";
+  const p=$("dp");p.textContent="";
+  p.appendChild(document.createTextNode(g?"Adakah anda pasti untuk memadam tetamu ":"Adakah anda pasti untuk memadam ucapan daripada "));
+  const b=document.createElement("b");b.textContent=r.name;p.appendChild(b);
+  p.appendChild(document.createTextNode("? Tindakan ini tidak boleh dibatalkan."));
+  openDlg(true);
+}
+function openDlg(v){$("dlg").classList.toggle("up",v);$("dlg").setAttribute("aria-hidden",String(!v));if(v)setTimeout(()=>$("dc").focus(),60);else pending=null}
+$("dc").addEventListener("click",()=>{if(!busy)openDlg(false)});
+$("dlg").addEventListener("click",e=>{if(e.target===$("dlg")&&!busy)openDlg(false)});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&$("dlg").classList.contains("up")&&!busy)openDlg(false)});
+$("dd").addEventListener("click",async()=>{
+  if(!pending||busy)return;
+  busy=true;$("dd").disabled=$("dc").disabled=true;$("dd").textContent="Memadam...";$("dm").textContent="";
+  try{
+    const res=await jsonp({action:pending.t==="rsvp"?"delete":"wish_delete",id:pending.r.id});
+    if(!res.ok)throw new Error(res.error);
+    await load();   // reload: row numbers shift after a delete
+    busy=false;openDlg(false);
+  }catch(e){busy=false;$("dm").textContent="Gagal memadam. Sila cuba lagi."}
+  $("dd").disabled=$("dc").disabled=false;$("dd").textContent="Ya, padam";
+});
+
+/* download menu */
+function csv(t){
+  const esc=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"',rows=data[t];
+  const head=t==="rsvp"?["Tarikh","Nama","Kehadiran"]:["Tarikh","Nama","Ucapan"];
+  const out=[head].concat(rows.map(r=>[fmt(r.at),r.name,t==="rsvp"?r.status:r.msg])).map(a=>a.map(esc).join(",")).join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+out],{type:"text/csv;charset=utf-8"}));a.download="juliza-rugasan-"+(t==="rsvp"?"tetamu":"ucapan")+".csv";a.click();URL.revokeObjectURL(a.href);
+}
+const menu=$("menu");
+function toggleMenu(v){menu.classList.toggle("hidden",!v);$("dl").setAttribute("aria-expanded",String(v))}
+$("dl").addEventListener("click",e=>{e.stopPropagation();toggleMenu(menu.classList.contains("hidden"))});
+menu.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{csv(b.dataset.t);toggleMenu(false)}));
+document.addEventListener("click",()=>toggleMenu(false));
+
+/* misc buttons */
+$("sh").addEventListener("click",()=>{const p=$("key").type==="password";$("key").type=p?"text":"password";$("sh").textContent=p?"Sembunyi":"Papar"});
+$("rf").addEventListener("click",()=>load().catch(()=>{$("stat").textContent="Gagal memuatkan."}));
+$("lo").addEventListener("click",()=>{try{sessionStorage.removeItem("jr_admin")}catch(e){}KEY="";$("app").classList.add("hidden");$("lf").classList.remove("hidden");$("key").value=""});
+
+async function start(k,auto){
+  if(!API){$("lm").textContent="API belum disambungkan. Isi URL Apps Script dalam fail ini.";return}
+  KEY=k;$("lb").disabled=true;$("lb").textContent="Menyemak...";$("lm").textContent="";
+  try{await load();try{sessionStorage.setItem("jr_admin",KEY)}catch(e){}$("lf").classList.add("hidden");$("app").classList.remove("hidden")}
+  catch(e){KEY="";try{sessionStorage.removeItem("jr_admin")}catch(x){}
+    if(!auto)$("lm").textContent=e.message==="auth"?"Admin key tidak betul.":"Sambungan gagal. Sila cuba lagi."}
+  $("lb").disabled=false;$("lb").textContent="Log masuk";
+}
+$("lf").addEventListener("submit",e=>{e.preventDefault();start($("key").value.trim(),false)});
+if(KEY)start(KEY,true);
+</script>
+</body>
+</html>
