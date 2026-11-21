@@ -581,7 +581,11 @@ if(COVER_BG)$("cover").style.setProperty("--cphoto","url('"+COVER_BG+"')");
 if(VERSE_BG)$("verse").style.setProperty("--vbg","url('"+VERSE_BG+"')");
 
 // gallery
-$("gal").innerHTML=Array.from({length:4},(_,i)=>GALLERY[i]?'<figure><img loading="lazy" alt="Foto '+(i+1)+'" src="'+GALLERY[i]+'"></figure>':'<figure>'+FL+'</figure>').join("");
+$("gal").innerHTML=Array.from({length:4},(_,i)=>GALLERY[i]?'<figure><img loading="eager" decoding="async" fetchpriority="low" alt="Foto '+(i+1)+'" src="'+GALLERY[i]+'"></figure>':'<figure>'+FL+'</figure>').join("");
+// Decode gallery images as soon as each download finishes; keep the four cards from waiting for scroll.
+
+// Ensure all gallery cards begin loading immediately, even before visitors scroll to the gallery.
+$("gal").querySelectorAll("img").forEach(img=>{img.addEventListener("load",()=>{if(img.decode)img.decode().catch(()=>{});},{once:true});img.addEventListener("error",()=>{img.closest("figure")?.classList.add("img-failed");},{once:true});});
 
 // wishes (saved to Google Sheet tab "Ucapan" via RSVP_API)
 const wl=$("wlist"),wl2=$("wl2");let wishes=[];
