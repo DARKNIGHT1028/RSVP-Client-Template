@@ -164,8 +164,6 @@ input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;widt
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 /* ===== CONFIG ===== */
@@ -260,37 +258,24 @@ function csv(t){
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+out],{type:"text/csv;charset=utf-8"}));a.download="juliza-rugasan-"+(t==="rsvp"?"tetamu":"ucapan")+".csv";a.click();URL.revokeObjectURL(a.href);
 }
 function pdf(t){
-  if(!window.jspdf||!window.jspdf.jsPDF){alert("Komponen PDF tidak dapat dimuatkan. Semak sambungan internet dan cuba lagi.");return}
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
-  const guest=t==="rsvp",title=guest?"SENARAI TETAMU / RSVP":"SENARAI UCAPAN";
-  const head=guest?[["Bil.","Tarikh RSVP","Nama Tetamu","Kehadiran"]]:[["Bil.","Tarikh","Nama Tetamu","Ucapan"]];
-  const body=data[t].map((r,i)=>guest
-    ?[String(i+1),fmt(r.at),r.name||"",r.status||""]
-    :[String(i+1),fmt(r.at),r.name||"",r.msg||""]);
-  doc.setFont("helvetica","bold");doc.setFontSize(17);doc.text("JULIZA & RUGASAN",14,16);
-  doc.setFont("helvetica","normal");doc.setFontSize(11);doc.text(title,14,23);
-  doc.setFontSize(9);doc.text("Majlis Perkahwinan · 27.12.2026",14,29);
-  doc.text("Jumlah rekod: "+body.length,283,29,{align:"right"});
-  doc.autoTable({
-    startY:35,head,body,
-    theme:"grid",
-    margin:{left:14,right:14,top:35,bottom:16},
-    styles:{font:"helvetica",fontSize:9,cellPadding:3,overflow:"linebreak",valign:"middle",lineColor:[210,190,200],lineWidth:.2},
-    headStyles:{fillColor:[142,19,86],textColor:255,fontStyle:"bold",halign:"center"},
-    alternateRowStyles:{fillColor:[253,238,245]},
-    columnStyles:guest
-      ?{0:{cellWidth:13,halign:"center"},1:{cellWidth:42},2:{cellWidth:125},3:{cellWidth:65,halign:"center"}}
-      :{0:{cellWidth:13,halign:"center"},1:{cellWidth:42},2:{cellWidth:55},3:{cellWidth:"auto"}},
-    didDrawPage:()=>{
-      const page=doc.internal.getNumberOfPages(),h=doc.internal.pageSize.getHeight(),w=doc.internal.pageSize.getWidth();
-      doc.setFontSize(8);doc.setTextColor(120);doc.text("Juliza & Rugasan · Laporan Admin",14,h-7);
-      doc.text("Halaman "+page,w-14,h-7,{align:"right"});
-    },
-    showHead:"everyPage",
-    rowPageBreak:"avoid"
-  });
-  doc.save("juliza-rugasan-"+(guest?"senarai-tetamu":"senarai-ucapan")+".pdf");
+  const guest=t==="rsvp",title=guest?"SENARAI TETAMU / RSVP":"SENARAI UCAPAN",rows=data[t]||[];
+  const esc=v=>String(v==null?"":v).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const head=guest?["Bil.","Tarikh RSVP","Nama Tetamu","Kehadiran"]:["Bil.","Tarikh","Nama Tetamu","Ucapan"];
+  const body=rows.map((r,i)=>guest?[i+1,fmt(r.at),r.name||"",r.status||""]:[i+1,fmt(r.at),r.name||"",r.msg||""]);
+  const win=window.open("","_blank");
+  if(!win){alert("Pelayar menyekat tetingkap cetakan. Benarkan pop-up untuk laman ini dan cuba lagi.");return}
+  const tableRows=body.map(row=>"<tr>"+row.map(v=>"<td>"+esc(v)+"</td>").join("")+"</tr>").join("");
+  win.document.open();
+  win.document.write(`<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} - Juliza &amp; Rugasan</title><style>
+  @page{size:A4 landscape;margin:15mm 12mm 17mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#292329;margin:0;font-size:10pt}
+  h1{font-size:19pt;margin:0 0 5px;color:#8e1356}h2{font-size:12pt;margin:0 0 5px}.meta{font-size:9pt;color:#665b63;margin-bottom:15px;display:flex;justify-content:space-between;gap:12px}
+  table{width:100%;border-collapse:collapse;table-layout:fixed}thead{display:table-header-group}tr{break-inside:avoid;page-break-inside:avoid}
+  th,td{border:1px solid #d2bec8;padding:7px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#8e1356!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tbody tr:nth-child(even){background:#fdeff5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}th:first-child,td:first-child{width:7%;text-align:center}th:nth-child(2),td:nth-child(2){width:17%}
+  ${guest?"th:nth-child(3),td:nth-child(3){width:48%}th:nth-child(4),td:nth-child(4){width:28%}":"th:nth-child(3),td:nth-child(3){width:23%}th:nth-child(4),td:nth-child(4){width:53%}"}
+  .footer{margin-top:10px;font-size:8pt;color:#756b72;text-align:right}@media screen{body{padding:22px;background:#f5f1f3}.sheet{background:white;padding:22px;max-width:1100px;margin:auto;box-shadow:0 2px 14px #0002}.actions{max-width:1100px;margin:0 auto 14px;display:flex;justify-content:flex-end;gap:10px}button{border:0;border-radius:8px;padding:11px 18px;background:#8e1356;color:white;font-size:14px;cursor:pointer}.secondary{background:#756b72}}@media print{.actions{display:none}body{padding:0}.sheet{padding:0}}
+  </style></head><body><div class="actions"><button class="secondary" onclick="window.close()">Tutup</button><button onclick="window.print()">Cetak / Simpan PDF</button></div><main class="sheet"><h1>JULIZA &amp; RUGASAN</h1><h2>${esc(title)}</h2><div class="meta"><span>Majlis Perkahwinan · 27.12.2026</span><span>Jumlah rekod: ${body.length}</span></div><table><thead><tr>${head.map(v=>"<th>"+esc(v)+"</th>").join("")}</tr></thead><tbody>${tableRows||'<tr><td colspan="4">Tiada rekod untuk dipaparkan.</td></tr>'}</tbody></table><div class="footer">Juliza &amp; Rugasan · Laporan Admin</div></main><script>window.addEventListener("load",()=>setTimeout(()=>window.print(),400));<\/script></body></html>`);
+  win.document.close();
 }
 const menu=$("menu");
 function toggleMenu(v){menu.classList.toggle("hidden",!v);$("dl").setAttribute("aria-expanded",String(v))}
