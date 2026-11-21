@@ -9,7 +9,7 @@
 <link rel="preload" as="image" href="client%20image/Image%201.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;700&family=Parisienne&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--bg:#fdeef5;--card:#fff7fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0}
+:root{color-scheme:light;--bg:#fdeef5;--card:#fff7fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0;--reading-scale:1}
 *{box-sizing:border-box}
 html{overflow-x:hidden;overflow-y:scroll;padding-top:env(safe-area-inset-top,0px);scroll-behavior:auto;-webkit-text-size-adjust:100%}
 body{margin:0;background:#f1cfe0;color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;touch-action:pan-y}
@@ -165,6 +165,37 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 .rv{opacity:0;transform:translate3d(0,22px,0);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.25,1);transition-delay:calc(var(--d,0)*85ms)}
 .rv.in{opacity:1;transform:none}
 
+/* accessible reader controls */
+.reader-tools{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:11;width:min(100%,480px);display:none;align-items:center;justify-content:center;gap:8px;padding:7px 10px;pointer-events:none}
+.reader-tools.show{display:flex}
+.reader-tools button{pointer-events:auto;min-height:42px;min-width:44px;border:1px solid var(--gold);border-radius:99px;background:rgba(255,247,251,.97);color:var(--wine);font-size:12px;font-weight:700;padding:8px 13px;box-shadow:0 3px 12px #8e135622;touch-action:manipulation}
+.reader-tools #scrollToggle{min-width:128px}
+.reader-tools button:active,.dock button:active,.strip:active{transform:scale(.97)}
+.reader-tools button[aria-pressed="true"]{background:var(--wine);color:#fff;border-color:var(--wine)}
+.dock button:not(.dtab){min-height:48px;min-width:0;padding:5px 2px;gap:4px;touch-action:manipulation}
+.dock em{font-size:20px}
+.dock button span{overflow-wrap:anywhere}
+button,a{ -webkit-tap-highlight-color:transparent }
+.lead{font-size:calc(17px * var(--reading-scale))}
+.inv li span{font-size:calc(17px * var(--reading-scale))}
+.info .val{font-size:calc(21px * var(--reading-scale))}
+.inv-text{font-size:calc(16px * var(--reading-scale))}
+.host{font-size:calc(19px * var(--reading-scale))}
+.greet{font-size:calc(17px * var(--reading-scale))}
+.wlist div,.wl2 div{font-size:calc(14px * var(--reading-scale))}
+.wlist b,.wl2 b{font-size:calc(18px * var(--reading-scale))}
+@media(min-width:600px){
+  .reader-tools{gap:10px;padding:9px 14px}
+  .reader-tools button{min-height:46px;padding:9px 16px;font-size:13px}
+  .dock button:not(.dtab){min-height:54px;font-size:13px}
+}
+@media(max-width:360px){
+  .reader-tools{gap:5px;padding-left:6px;padding-right:6px}
+  .reader-tools button{min-width:42px;padding:7px 10px;font-size:11px}
+  .reader-tools #scrollToggle{min-width:112px}
+  .dock button:not(.dtab){font-size:10px}
+}
+
 /* dock, strip, swipe hint */
 .swipe{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;display:flex;flex-direction:column;align-items:center;color:var(--wine);font-size:12px;font-weight:500;letter-spacing:.06em;pointer-events:none;opacity:0;transition:opacity .5s}
 .swipe.show{opacity:1}
@@ -175,6 +206,7 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 .dock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);z-index:10;display:none;grid-template-columns:repeat(5,1fr);padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,247,251,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s}
 .dock.show{display:grid}
 .dock.hide{transform:translate(-50%,calc(100% + 24px));visibility:hidden;transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s}
+.reader-tools.hide{transform:translate(-50%,calc(100% + 24px));visibility:hidden;transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s}
 .dock button:not(.dtab){display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--wine);font-size:12px;font-weight:700;cursor:pointer;padding:4px 6px;text-align:center;line-height:1.2;justify-content:flex-start}
 .dock em{font-style:normal;font-size:18px}
 .dock .dtab{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:84px;height:28px;padding:0;background:none;border:0}
@@ -489,6 +521,12 @@ section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
 
 <div class="swipe" id="swipe" aria-hidden="true"><i></i><i></i><span>Leret ke atas</span></div>
 
+<div class="reader-tools" id="readerTools" aria-label="Kawalan bacaan">
+  <button type="button" id="scrollToggle" aria-pressed="false">Auto scroll: ON</button>
+  <button type="button" id="textDown" aria-label="Kecilkan saiz teks">A−</button>
+  <button type="button" id="textUp" aria-label="Besarkan saiz teks">A+</button>
+</div>
+
 <nav class="dock" id="dock">
   <button type="button" class="dtab" id="dTab" aria-label="Sembunyi menu"></button>
   <button type="button" id="dRsvp"><em><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></em>RSVP</button>
@@ -638,20 +676,39 @@ function openInv(){
   $("cover").classList.add("opening");const ps=$("pstage");setTimeout(()=>ps.classList.add("play"),1000);
   $("open").disabled=true;$("open").textContent="Jemputan dibuka";
   bg.volume=.45;if(MUSIC_SRC)bg.play().catch(()=>{});upd();
-  setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
+  setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("readerTools").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
   if(!reduce)for(let i=0;i<14;i++){const p=document.createElement("span");p.className="petal";p.innerHTML=FP;p.style.left=Math.random()*100+"vw";p.style.fontSize=(10+Math.random()*12)+"px";p.style.setProperty("--dr",(Math.random()*140-70)+"px");p.style.animationDuration=(7+Math.random()*7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),15000)}
 }
+
 $("open").addEventListener("click",openInv);
+
+// Reader controls: manual pause stays paused until the visitor turns auto-scroll back on.
+function syncReaderTools(){
+  const b=$("scrollToggle");
+  b.textContent=manualPaused?"Auto scroll: OFF":"Auto scroll: ON";
+  b.setAttribute("aria-pressed",String(manualPaused));
+}
+$("scrollToggle").addEventListener("click",()=>{
+  manualPaused=!manualPaused;clearTimeout(idleT);
+  if(manualPaused)setAuto(false);
+  else{fin=false;setAuto(true)}
+  syncReaderTools();
+});
+let readingScale=1;
+function applyReadingScale(){document.documentElement.style.setProperty("--reading-scale",String(readingScale))}
+$("textDown").addEventListener("click",()=>{readingScale=Math.max(.85,Math.round((readingScale-.05)*100)/100);applyReadingScale()});
+$("textUp").addEventListener("click",()=>{readingScale=Math.min(1.25,Math.round((readingScale+.05)*100)/100);applyReadingScale()});
+
 
 // auto-scroll: starts by itself; a touch/wheel pauses it, then it resumes after a short idle
 const sheet=$("sheet"),wsheet=$("wsheet"),wform=$("wform"),PX=90;
 const anySheet=()=>sheet.classList.contains("up")||wsheet.classList.contains("up")||wform.classList.contains("up");
-let auto=false,pos=0,last=0,idleT=null,fin=false,raf=0,ty=null;
+let auto=false,pos=0,last=0,idleT=null,fin=false,raf=0,ty=null,manualPaused=false;
 const sc=()=>document.scrollingElement||document.documentElement;
 const maxS=()=>Math.max(0,sc().scrollHeight-innerHeight);
 function setAuto(v){
   if(!v){auto=false;cancelAnimationFrame(raf);last=0;return}
-  if(auto||fin||!opened||reduce||anySheet())return;
+  if(auto||fin||manualPaused||!opened||reduce||anySheet())return;
   if(maxS()<=1||sc().scrollTop>=maxS()-2){fin=true;return}
   auto=true;pos=sc().scrollTop;last=0;raf=requestAnimationFrame(step);
 }
@@ -662,7 +719,7 @@ function step(t){
   if(pos>=maxS()-1){fin=true;setAuto(false);return}
   raf=requestAnimationFrame(step);
 }
-function pauseAuto(){if(!opened)return;setAuto(false);clearTimeout(idleT);fin=false;if(!reduce&&!anySheet())idleT=setTimeout(()=>setAuto(true),1800)}
+function pauseAuto(){if(!opened)return;setAuto(false);clearTimeout(idleT);fin=false;if(!manualPaused&&!reduce&&!anySheet())idleT=setTimeout(()=>setAuto(true),1800)}
 const chrome=el=>el&&el.closest&&el.closest("#dock,#strip,#sheet,#wsheet,#wform,#cover");
 addEventListener("wheel",e=>{if(opened&&!chrome(e.target)&&e.deltaY)pauseAuto()},{passive:true});
 addEventListener("touchstart",e=>{ty=(opened&&!chrome(e.target))?e.touches[0].clientY:null},{passive:true});
@@ -672,8 +729,8 @@ addEventListener("scroll",()=>$("swipe").classList.toggle("show",opened&&(Date.n
 
 // dock hide / strip
 (function(){
-  const dock=$("dock"),strip=$("strip");let y0=null;
-  const setHide=h=>{dock.classList.toggle("hide",h);strip.classList.toggle("show",h)};
+  const dock=$("dock"),strip=$("strip"),tools=$("readerTools");let y0=null;
+  const setHide=h=>{dock.classList.toggle("hide",h);tools.classList.toggle("hide",h);strip.classList.toggle("show",h)};
   $("dTab").addEventListener("click",()=>setHide(true));
   dock.addEventListener("touchstart",e=>{y0=e.touches[0].clientY},{passive:true});
   dock.addEventListener("touchend",e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>28)setHide(true);y0=null},{passive:true});
