@@ -9,7 +9,7 @@
 <link rel="preload" as="image" href="client%20image/Image%201.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;700&family=Parisienne&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--bg:#fdeef5;--card:#fff7fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0;--reading-scale:1}
+:root{color-scheme:light;--reading-scale:1;--bg:#fdeef5;--card:#fff7fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0}
 *{box-sizing:border-box}
 html{overflow-x:hidden;overflow-y:scroll;padding-top:env(safe-area-inset-top,0px);scroll-behavior:auto;-webkit-text-size-adjust:100%}
 body{margin:0;background:#f1cfe0;color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;touch-action:pan-y}
@@ -168,18 +168,17 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 /* accessible reader controls */
 .reader-tools{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:12;width:min(calc(100% - 24px),440px);display:none;align-items:center;justify-content:center;gap:9px;padding:12px 46px 12px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,247,251,.98);box-shadow:0 8px 28px rgba(110,10,64,.18)}
 .reader-tools.open{display:flex}
-.reader-tools button{min-height:44px;min-width:48px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--wine);font-size:13px;font-weight:700;padding:9px 14px;touch-action:manipulation}
+.reader-tools button{min-height:44px;min-width:48px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--wine);font-size:13px;font-weight:700;padding:9px 14px;touch-action:manipulation;cursor:pointer}
 .reader-tools #scrollToggle{min-width:132px}
 .reader-tools #readerClose{position:absolute;right:7px;top:7px;min-width:34px;width:34px;height:34px;min-height:34px;padding:0;border:0;background:transparent;font-size:22px;box-shadow:none}
+.reader-tools button:disabled{opacity:.45;cursor:default}
+.reader-tools{flex-wrap:wrap}
 .reader-tools button:active,.dock button:active,.strip:active{transform:scale(.97)}
 .reader-tools button[aria-pressed="true"]{background:var(--wine);color:#fff;border-color:var(--wine)}
-.dock .dtab{top:-25px;width:64px;height:26px;border-radius:12px 12px 0 0;background:rgba(255,247,251,.96);border:1px solid var(--line);border-bottom:0;color:var(--wine);font:700 12px "DM Sans";letter-spacing:.04em}
-.dock .dtab::before{content:none}
-.dock .dtab::after{content:"Aa";}
 .dock button:not(.dtab){min-height:48px;min-width:0;padding:5px 2px;gap:4px;touch-action:manipulation}
 .dock em{font-size:20px}
 .dock button span{overflow-wrap:anywhere}
-button,a{ -webkit-tap-highlight-color:transparent }
+button,a{-webkit-tap-highlight-color:transparent}
 .lead{font-size:calc(17px * var(--reading-scale))}
 .inv li span{font-size:calc(17px * var(--reading-scale))}
 .info .val{font-size:calc(21px * var(--reading-scale))}
@@ -188,17 +187,8 @@ button,a{ -webkit-tap-highlight-color:transparent }
 .greet{font-size:calc(17px * var(--reading-scale))}
 .wlist div,.wl2 div{font-size:calc(14px * var(--reading-scale))}
 .wlist b,.wl2 b{font-size:calc(18px * var(--reading-scale))}
-@media(min-width:600px){
-  .reader-tools{gap:10px;padding:14px 48px 14px 14px}
-  .reader-tools button{min-height:48px;padding:10px 17px;font-size:14px}
-  .dock button:not(.dtab){min-height:54px;font-size:13px}
-}
-@media(max-width:360px){
-  .reader-tools{gap:5px;padding:10px 42px 10px 8px}
-  .reader-tools button{min-width:42px;padding:8px 10px;font-size:11px}
-  .reader-tools #scrollToggle{min-width:112px}
-  .dock button:not(.dtab){font-size:10px}
-}
+@media(min-width:600px){.reader-tools{gap:10px;padding:14px 48px 14px 14px}.reader-tools button{min-height:48px;padding:10px 17px;font-size:14px}.dock button:not(.dtab){min-height:54px;font-size:13px}}
+@media(max-width:360px){.reader-tools{gap:5px;padding:10px 42px 10px 8px}.reader-tools button{min-width:42px;padding:8px 10px;font-size:11px}.reader-tools #scrollToggle{min-width:112px}.dock button:not(.dtab){font-size:10px}}
 
 /* dock, strip, swipe hint */
 .swipe{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;display:flex;flex-direction:column;align-items:center;color:var(--wine);font-size:12px;font-weight:500;letter-spacing:.06em;pointer-events:none;opacity:0;transition:opacity .5s}
@@ -243,7 +233,7 @@ button,a{ -webkit-tap-highlight-color:transparent }
 .x{display:block;margin:10px auto 0;background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer}
 .petal{position:fixed;top:-30px;z-index:15;pointer-events:none;color:#e48ab6;opacity:.75;animation:fall linear forwards}
 @keyframes fall{to{transform:translate3d(var(--dr),110vh,0) rotate(480deg);opacity:0}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.rv{opacity:1!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.rv{opacity:1!important;transform:none!important}.pstage .pair,.s-verse .vb,.s-verse .vline{opacity:1!important;transform:none!important}}
 </style>
 <style id="elegant">
 /* ===== Elegant refinement: same palette, quieter and more refined ===== */
@@ -347,6 +337,9 @@ section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
 #cover .btn{background:rgba(255,255,255,.06);color:#fff;border:1px solid #fff;border-radius:999px;padding:12px 34px;font:600 17px "Cormorant Garamond",serif;letter-spacing:.03em;text-transform:none;box-shadow:none;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 #cover .btn:disabled{opacity:.8}
 #cover.opening .cv-bottom{opacity:.0;transition:opacity .5s}
+/* cover is fully opaque: solid base under the photo, and the page stays hidden until opened */
+#cover{background-color:#3a0a26}
+body.lock .phone>section{visibility:hidden}
 /* envelope inside the An-Naba' slide: one continuous, overlapping timeline */
 #cover.opening .cv-bottom{opacity:0;transition:opacity .45s}
 .pstage{position:relative;width:100%;max-width:400px;margin:0 auto}
@@ -390,6 +383,21 @@ section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
 /* calmer motion */
 .rv{transform:translate3d(0,14px,0);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.75,.25,1)}
 .petal{opacity:.5}
+/* reader tab: top-right of the dock (centre handle stays as the hide indicator) */
+.dock .dreader{left:auto;right:14px;top:-25px;transform:none;width:58px;height:26px;border-radius:12px 12px 0 0;background:rgba(255,247,251,.96);border:1px solid var(--line);border-bottom:0;color:var(--wine);font:700 12px "DM Sans";letter-spacing:.04em;cursor:pointer}
+.dock .dreader::before{content:none}
+/* text size buttons (A- / A+): must come last so they beat the fixed sizes above */
+.lead{font-size:calc(18px * var(--reading-scale))}
+.s-verse .vq{font-size:calc(16px * var(--reading-scale))}
+.greet{font-size:calc(17px * var(--reading-scale))}
+.host{font-size:calc(16px * var(--reading-scale))}
+.inv-text{font-size:calc(16.5px * var(--reading-scale))}
+.banner .n{font-size:calc(16px * var(--reading-scale))}
+.info .val{font-size:calc(22px * var(--reading-scale))}
+.prog span{font-size:calc(17px * var(--reading-scale))}
+.inv li span{font-size:calc(17.5px * var(--reading-scale))}
+.wlist div,#wsheet .wl2 div{font-size:calc(14px * var(--reading-scale))}
+.wlist b,#wsheet .wl2 b{font-size:calc(18px * var(--reading-scale))}
 </style>
 </head>
 <body class="lock">
@@ -525,14 +533,16 @@ section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
 <div class="swipe" id="swipe" aria-hidden="true"><i></i><i></i><span>Leret ke atas</span></div>
 
 <div class="reader-tools" id="readerTools" role="group" aria-label="Kawalan bacaan">
-  <button type="button" id="scrollToggle" aria-pressed="false">Auto scroll: ON</button>
+  <button type="button" id="scrollToggle" aria-pressed="true">Auto scroll: ON</button>
   <button type="button" id="textDown" aria-label="Kecilkan saiz teks">A−</button>
+  <button type="button" id="textReset" aria-label="Set semula saiz teks ke asal" disabled>Reset</button>
   <button type="button" id="textUp" aria-label="Besarkan saiz teks">A+</button>
   <button type="button" id="readerClose" aria-label="Tutup kawalan bacaan">×</button>
 </div>
 
 <nav class="dock" id="dock">
-  <button type="button" class="dtab" id="dTab" aria-label="Buka kawalan bacaan" aria-expanded="false"></button>
+  <button type="button" class="dtab" id="dTab" aria-label="Sembunyi menu"></button>
+  <button type="button" class="dtab dreader" id="dAa" aria-label="Buka kawalan bacaan" aria-expanded="false">Aa</button>
   <button type="button" id="dRsvp"><em><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></em>RSVP</button>
   <button type="button" id="dMap"><em><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></em>Lokasi</button>
   <button type="button" id="dWish"><em><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></em>Ucapan</button>
@@ -589,7 +599,7 @@ const PHOTOS=[];               // 2 portrait photos in white frames, e.g. "img/p
 const CARD_BG="";              // photo behind the invitation card, e.g. "img/card-bg.jpg" (empty = soft pink)
 const COVER_BG="client%20image/Image%201.png";             // opening photo, e.g. "img/cover.jpg" (empty = deep rose gradient)
 const VERSE_BG="";             // optional full-width background photo behind the framed photos, e.g. "img/bg.jpg"
-const GALLERY=["https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/2nd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/3rd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/4rd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/5th%20image.jpg"]; // 4 gallery cards
+const GALLERY=["https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/2nd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/3rd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/4rd%20image.jpg","https://raw.githubusercontent.com/DARKNIGHT1028/RSVP-Client-Template/main/client%20image/5th%20image.jpg"];              // 4 photos, e.g. ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg"]
 const RSVP_API="https://script.google.com/macros/s/AKfycbw62jq0JnwHAmiOdP8A0jZ3RHiHXrIEE0GmWFw6MUOO00WUt5GNSnS5KPD-meFf08NX/exec";             // paste your own Google Apps Script web-app URL here for this couple
 const INVITERS=[
   "KK Mohd @ Sakaran & Isteri",
@@ -624,10 +634,8 @@ if(VERSE_BG)$("verse").style.setProperty("--vbg","url('"+VERSE_BG+"')");
 
 // gallery
 $("gal").innerHTML=Array.from({length:4},(_,i)=>GALLERY[i]?'<figure><img loading="eager" decoding="async" fetchpriority="low" alt="Foto '+(i+1)+'" src="'+GALLERY[i]+'"></figure>':'<figure>'+FL+'</figure>').join("");
-// Decode gallery images as soon as each download finishes; keep the four cards from waiting for scroll.
 
-// Ensure all gallery cards begin loading immediately, even before visitors scroll to the gallery.
-$("gal").querySelectorAll("img").forEach(img=>{img.addEventListener("load",()=>{if(img.decode)img.decode().catch(()=>{});},{once:true});img.addEventListener("error",()=>{img.closest("figure")?.classList.add("img-failed");},{once:true});});
+$("gal").querySelectorAll("img").forEach(img=>{img.addEventListener("load",()=>{if(img.decode)img.decode().catch(()=>{})},{once:true});img.addEventListener("error",()=>{img.closest("figure")?.classList.add("img-failed")},{once:true})});
 
 // wishes (saved to Google Sheet tab "Ucapan" via RSVP_API)
 const wl=$("wlist"),wl2=$("wl2");let wishes=[];
@@ -645,7 +653,7 @@ function jsonp(params,ok,fail){
 }
 function loadWishes(){
   if(!RSVP_API)return;
-  jsonp({action:"wishes"},r=>{if(r&&r.ok){wishes=r.rows;renderWishes()}},()=>{});
+  jsonp({action:"wishes"},r=>{if(r&&r.ok){wishes=Array.isArray(r.rows)?r.rows:[];renderWishes()}},()=>{});
 }
 renderWishes();loadWishes();
 let wsending=false;
@@ -683,34 +691,28 @@ function openInv(){
   setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
   if(!reduce)for(let i=0;i<14;i++){const p=document.createElement("span");p.className="petal";p.innerHTML=FP;p.style.left=Math.random()*100+"vw";p.style.fontSize=(10+Math.random()*12)+"px";p.style.setProperty("--dr",(Math.random()*140-70)+"px");p.style.animationDuration=(7+Math.random()*7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),15000)}
 }
-
 $("open").addEventListener("click",openInv);
 
-// Reader controls: manual pause stays paused until the visitor turns auto-scroll back on.
-function syncReaderTools(){
-  const b=$("scrollToggle");
-  b.textContent=manualPaused?"Auto scroll: OFF":"Auto scroll: ON";
-  b.setAttribute("aria-pressed",String(manualPaused));
-}
+// reader controls: manual pause stays paused until the visitor turns auto-scroll back on
+function syncReaderTools(){const b=$("scrollToggle");b.textContent=manualPaused?"Auto scroll: OFF":"Auto scroll: ON";b.setAttribute("aria-pressed",String(!manualPaused))}
 $("scrollToggle").addEventListener("click",()=>{
   manualPaused=!manualPaused;clearTimeout(idleT);
-  if(manualPaused)setAuto(false);
-  else{fin=false;setAuto(true)}
+  if(manualPaused)setAuto(false);else{fin=false;setAuto(true)}
   syncReaderTools();
 });
 function toggleReaderTools(open){
-  const panel=$("readerTools"),trigger=$("dTab");
+  const panel=$("readerTools"),trigger=$("dAa");
   panel.classList.toggle("open",open);
   trigger.setAttribute("aria-expanded",String(open));
   trigger.setAttribute("aria-label",open?"Tutup kawalan bacaan":"Buka kawalan bacaan");
 }
-$("dTab").addEventListener("click",()=>toggleReaderTools(!$("readerTools").classList.contains("open")));
+$("dAa").addEventListener("click",()=>toggleReaderTools(!$("readerTools").classList.contains("open")));
 $("readerClose").addEventListener("click",()=>toggleReaderTools(false));
 let readingScale=1;
-function applyReadingScale(){document.documentElement.style.setProperty("--reading-scale",String(readingScale))}
+function applyReadingScale(){document.documentElement.style.setProperty("--reading-scale",String(readingScale));$("textReset").disabled=readingScale===1}
+$("textReset").addEventListener("click",()=>{readingScale=1;applyReadingScale()});
 $("textDown").addEventListener("click",()=>{readingScale=Math.max(.85,Math.round((readingScale-.05)*100)/100);applyReadingScale()});
 $("textUp").addEventListener("click",()=>{readingScale=Math.min(1.25,Math.round((readingScale+.05)*100)/100);applyReadingScale()});
-
 
 // auto-scroll: starts by itself; a touch/wheel pauses it, then it resumes after a short idle
 const sheet=$("sheet"),wsheet=$("wsheet"),wform=$("wform"),PX=90;
@@ -732,7 +734,7 @@ function step(t){
   raf=requestAnimationFrame(step);
 }
 function pauseAuto(){if(!opened)return;setAuto(false);clearTimeout(idleT);fin=false;if(!manualPaused&&!reduce&&!anySheet())idleT=setTimeout(()=>setAuto(true),1800)}
-const chrome=el=>el&&el.closest&&el.closest("#dock,#strip,#sheet,#wsheet,#wform,#cover");
+const chrome=el=>el&&el.closest&&el.closest("#dock,#strip,#readerTools,#sheet,#wsheet,#wform,#cover");
 addEventListener("wheel",e=>{if(opened&&!chrome(e.target)&&e.deltaY)pauseAuto()},{passive:true});
 addEventListener("touchstart",e=>{ty=(opened&&!chrome(e.target))?e.touches[0].clientY:null},{passive:true});
 addEventListener("touchmove",e=>{if(ty!=null&&Math.abs(e.touches[0].clientY-ty)>12){pauseAuto();ty=null}},{passive:true});
@@ -741,7 +743,7 @@ addEventListener("scroll",()=>$("swipe").classList.toggle("show",opened&&(Date.n
 
 // dock hide / strip
 (function(){
-  const dock=$("dock"),strip=$("strip"),tools=$("readerTools");let y0=null;
+  const dock=$("dock"),strip=$("strip");let y0=null;
   const setHide=h=>{dock.classList.toggle("hide",h);toggleReaderTools(false);strip.classList.toggle("show",h)};
   $("dTab").addEventListener("click",()=>setHide(true));
   dock.addEventListener("touchstart",e=>{y0=e.touches[0].clientY},{passive:true});
