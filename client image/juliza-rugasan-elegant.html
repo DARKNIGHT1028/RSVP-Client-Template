@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jemputan Majlis Kahwin - Juliza &amp; Rugasan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;700&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#fdeef5;--card:#fff7fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0}
+*{box-sizing:border-box}
+html{overflow-x:hidden;overflow-y:scroll;padding-top:env(safe-area-inset-top,0px);scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f1cfe0;color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;touch-action:pan-y}
+button{font:inherit}
+.ic{width:1em;height:1em;display:inline-block;vertical-align:-.125em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.ic.fill{fill:currentColor;stroke:none}
+.phone{max-width:480px;min-height:100dvh;margin:0 auto;background:var(--bg);position:relative;box-shadow:0 0 60px #8e135633}
+body.lock{overflow:hidden;height:100dvh}
+.script{font-family:"Parisienne",cursive;color:var(--dusty)}
+.serif{font-family:"Cormorant Garamond",serif}
+.btn{border:1px solid var(--gold);border-radius:99px;padding:13px 30px;background:linear-gradient(135deg,#c2257a,#8e1356);color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;cursor:pointer;box-shadow:0 8px 20px #8e13562b}
+.pill{display:inline-block;margin:6px 4px 0;padding:11px 22px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--wine);font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+:focus-visible{outline:3px solid var(--dusty);outline-offset:3px}
+
+/* cover + envelope */
+#cover{position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:480px;transform:translate3d(-50%,0,0);z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;overflow:hidden;background:linear-gradient(180deg,#f8eee9,#ecdcd3 55%,#e0cbc0);transition:transform 1.15s cubic-bezier(.22,.72,.2,1)}
+#cover.gone{transform:translate3d(-50%,-100%,0)}
+#cover .frame{position:absolute;inset:18px;border:1px solid var(--gold);pointer-events:none}
+#cover .frame:after{content:"";position:absolute;inset:5px;border:1px solid #e6c98e}
+.cv-top{font-size:12px;color:var(--wine);letter-spacing:.14em}
+.cv-title{font:500 34px/1.05 "Cormorant Garamond",serif;color:var(--wine);margin:12px 0 4px}
+.cv-script{font-size:50px;margin:0}
+.cv-date{font:500 20px "Cormorant Garamond",serif;letter-spacing:.2em;color:var(--wine);margin:6px 0 0}
+.env-wrap{font-size:calc(min(84vw,340px)/34);width:34em;height:23.6em;margin:clamp(70px,15vh,130px) auto 22px;position:relative;cursor:pointer;animation:bobE 3.2s ease-in-out infinite}
+
+@keyframes bobE{50%{transform:translateY(-7px)}}
+.envelope{position:absolute;inset:0;background:linear-gradient(160deg,#d9aca3,#c99489);border-radius:.6em;box-shadow:0 .9em 1.4em #7a463d38}
+.pocket{position:absolute;inset:0;border-radius:.6em;z-index:2}
+.shp{position:absolute;inset:0;width:100%;height:100%;display:block}
+.flapsh{position:absolute;left:0;right:0;top:.5em;height:58%;z-index:3;transition:opacity .15s}
+.flap{position:absolute;left:0;right:0;top:0;height:58%;transform-origin:top;transition:transform .85s ease,z-index 0s;z-index:4}
+.emb{position:absolute;left:50%;top:3%;width:11em;height:11em;margin-left:-5.5em;color:#f5dad2;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(.12em .12em 0 rgba(120,66,56,.5)) drop-shadow(-.07em -.07em 0 rgba(255,255,255,.65));transition:opacity .25s .2s}
+.seal{position:absolute;z-index:6;left:50%;top:58%;transform:translate(-50%,-50%);width:5.4em;height:5.4em;border-radius:50%;background:radial-gradient(circle at 35% 28%,#f5e0d6,#dcb4a6 55%,#bb8c7c);display:grid;place-items:center;font:700 1.6em "Cormorant Garamond",serif;color:#c29b8d;text-shadow:0 .06em 0 rgba(255,255,255,.75),0 -.04em 0 rgba(110,60,50,.3);box-shadow:0 .3em .6em rgba(100,55,45,.4),inset 0 0 0 .35em rgba(255,255,255,.18),inset 0 0 .5em rgba(110,60,50,.35);transition:opacity .4s,transform .5s;animation:beat 1.8s ease-in-out infinite}
+.seal:before{content:"";position:absolute;inset:.7em;border-radius:50%;border:.12em solid rgba(190,150,135,.9);box-shadow:inset 0 .06em .1em rgba(255,255,255,.5),0 .06em .1em rgba(255,255,255,.4)}
+@keyframes beat{50%{box-shadow:0 0 1.2em rgba(255,214,190,.95),0 .3em .6em rgba(100,55,45,.4),inset 0 0 0 .35em rgba(255,255,255,.18)}}
+.envelope.open .flap{transform:scaleY(-1);z-index:0;transition:transform .85s ease,z-index 0s .42s}
+.envelope.open .flapsh{opacity:0;visibility:hidden;transition:none}.envelope.open .emb{opacity:0}
+.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.6);animation:none}
+.letter{position:absolute;left:8.2em;width:17.6em;top:1.2em;height:20.4em;background:linear-gradient(180deg,#fbf5e8,#f1e6cf);border:1px solid #e6d9bb;box-shadow:0 .2em .6em rgba(90,50,40,.25);transition:transform 1s .45s cubic-bezier(.2,.75,.25,1);z-index:1;overflow:hidden}
+.envelope.open .letter{transform:translateY(-11em)}
+.foil{background:linear-gradient(120deg,#a8782a 0%,#f6dc8a 35%,#c99a3c 55%,#f9e7a6 75%,#a8782a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ivs{position:absolute;right:.5em;top:.8em;bottom:.8em;display:flex;gap:.5em;writing-mode:vertical-rl;text-align:center}
+.ivs .nm{font:400 2.5em/1 "Parisienne",cursive;white-space:nowrap}
+.ivs .sb{font:700 .6em/1 "DM Sans",sans-serif;letter-spacing:.24em;white-space:nowrap;align-self:center}
+.pk{position:absolute;left:.9em;top:1.4em;width:11em;height:16.4em;background:linear-gradient(160deg,#e5b9b5,#d2a09d);box-shadow:0 .15em .5em rgba(90,50,40,.3);overflow:hidden}
+.pk .emb2{position:absolute;left:1.6em;top:3.2em;width:10em;height:10em;color:#efcfc9;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(.1em .1em 0 rgba(120,66,56,.4)) drop-shadow(-.06em -.06em 0 rgba(255,255,255,.5));opacity:.9}
+.pk .t{position:absolute;left:.9em;top:.9em;font:700 .6em/1.5 "DM Sans",sans-serif;letter-spacing:.22em}
+.pk .d{position:absolute;left:.9em;top:2.7em;font:600 2.6em/1.12 "Cormorant Garamond",serif}
+.pk .d span{display:block}
+.bow{position:absolute;left:7.4em;top:6.2em;width:7.6em;height:auto;z-index:2;filter:drop-shadow(0 .15em .25em rgba(80,40,30,.3))}
+.tap{margin-top:12px;font-size:11px;letter-spacing:.16em;color:#b0668f;text-transform:uppercase;animation:blink 2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.35}}
+
+/* sections */
+section{padding:72px 26px;text-align:center;position:relative;overflow:hidden}
+section:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 0 0,#d6368a33,transparent 36%),radial-gradient(circle at 100% 100%,#d6368a33,transparent 36%),radial-gradient(circle at 100% 0,#f6a5cc3d,transparent 30%),radial-gradient(circle at 0 100%,#f6a5cc3d,transparent 30%)}
+section>*{position:relative;z-index:1}
+section.alt{background:var(--card)}
+.s-hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#fff0f7,#fdeef5)}
+h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6px}
+.lead{font:400 17px/1.7 "Cormorant Garamond",serif;color:#7d4a67;margin:0 auto 22px;max-width:330px}
+.orn{color:var(--gold);margin:16px 0;font-size:20px;display:flex;align-items:center;justify-content:center;gap:12px}
+.orn:before,.orn:after{content:"";width:46px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn:after{transform:scaleX(-1)}
+.small{font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+.hero-names{font-size:60px;line-height:1.2;margin:4px 0;padding:.12em .22em .18em;background:linear-gradient(90deg,#b3126a 30%,#ee6aa9 50%,#8e1356 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:-220% 0}}
+.rib{display:inline-block;padding:10px 28px;background:linear-gradient(90deg,#a8195e,#d6368a,#a8195e);color:#fff;font:italic 600 21px "Cormorant Garamond",serif;border-radius:99px;border:1px solid var(--gold);box-shadow:0 6px 16px #8e135633;margin:0 0 20px}
+
+/* invitation card + couple banner */
+.frame-card{max-width:350px;margin:0 auto;padding:26px 18px 24px;background:#fff;border:1px solid var(--gold);border-radius:28px;box-shadow:0 0 0 4px #ffffffaa,0 12px 28px #8e135622}
+.frame-card .jt{font:400 46px/1.1 "Parisienne",cursive;color:var(--dusty);margin:0}
+.frame-card .jk{font:700 24px/1.2 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 14px}
+.greet{font:italic 600 17px "Cormorant Garamond",serif;color:var(--ink);margin:0 0 14px}
+.host{font:700 19px/1.3 "Cormorant Garamond",serif;color:var(--ink);letter-spacing:.02em}
+.amp2{font:400 40px/1 "Parisienne",cursive;color:var(--dusty);margin:4px 0}
+.inv-text{font:italic 500 16px/1.6 "Cormorant Garamond",serif;color:#6b3a57;margin:16px 0 0}
+.inv-text b{font-style:italic;font-weight:600;color:var(--ink)}
+.banner{margin:26px auto 0;max-width:350px;padding:22px 16px;background:linear-gradient(135deg,#d6368a,#a8195e 50%,#8e1356);border:2px solid var(--gold);border-radius:34px/22px;box-shadow:0 0 0 4px #ffffffaa,0 12px 26px #8e135633,inset 0 0 0 3px #ffffff33;color:#fff}
+.banner .n{font:700 22px/1.25 "Cormorant Garamond",serif;letter-spacing:.04em;text-transform:uppercase}
+.banner .a{font:400 32px/1.1 "Parisienne",cursive;color:#ffe3a3;margin:2px 0}
+
+/* photos on photo background */
+.s-verse{background:linear-gradient(160deg,#a8195e,#6e0a40);color:#fff;padding:80px 20px 90px}
+.s-verse:before{content:"";position:absolute;inset:0;background:var(--vbg,none) center/cover no-repeat;filter:blur(3px);transform:scale(1.06);z-index:0}
+.s-verse:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(80,8,48,.3),rgba(80,8,48,.45));z-index:0}
+.pair{display:flex;justify-content:center;align-items:flex-start;max-width:400px;margin:0 auto}
+.ph{margin:0;padding:12px;background:#fff;border:0;border-radius:2px;box-shadow:0 14px 32px rgba(60,0,35,.55);position:relative;width:52%;flex:0 0 auto}
+.ph .im{aspect-ratio:2/3;overflow:hidden;background:linear-gradient(160deg,#f6c3dc,#e58db8);display:grid;place-items:center;color:#fff;font-size:34px}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph:nth-child(1),.ph.rv.in:nth-child(1){transform:rotate(-7deg) translateY(6px);z-index:1;margin-right:-6%}
+.ph:nth-child(2),.ph.rv.in:nth-child(2){transform:rotate(7deg) translateY(-6px);z-index:2}
+
+/* details */
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:340px;margin:0 auto 26px}
+.cd div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 4px}
+.cd b{display:block;font:500 30px "Cormorant Garamond",serif;color:var(--wine)}
+.cd span{font-size:11px;color:var(--muted)}
+.info{max-width:340px;margin:0 auto}
+.info .row{padding:15px 0;border-top:1px solid var(--line)}
+.info .lab{font-size:12px;color:var(--dusty);font-weight:700;letter-spacing:.08em;margin-bottom:6px}
+.info .val{font:600 21px/1.4 "Cormorant Garamond",serif}
+.prog{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:350px;margin:0 auto}
+.prog div{background:#fff;border:1px solid var(--gold);border-radius:20px;padding:20px 8px;box-shadow:0 8px 20px #8e13561c}
+.prog em{display:block;font-style:normal;font-size:34px;margin-bottom:6px;color:var(--dusty)}
+.prog b{display:block;font:700 19px "Cormorant Garamond",serif;color:var(--wine);letter-spacing:.06em}
+.prog span{display:block;font:600 16px/1.4 "Cormorant Garamond",serif;color:var(--ink);margin-top:4px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.gal figure{margin:0;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#fbe0ee,#f3c3dc);display:grid;place-items:center;color:#d98fb5;font-size:28px}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.script.thanks{font-size:52px;margin:14px 0 24px}
+
+/* turut mengundang */
+.inv-card{max-width:350px;margin:0 auto;padding:12px 20px;background:#fff;border:1px solid var(--gold);border-radius:24px;box-shadow:0 0 0 4px #ffffffaa,0 10px 24px #8e135620}
+.inv{list-style:none;margin:0;padding:0;text-align:left}
+.inv li{position:relative;padding:11px 0 11px 22px;border-top:1px solid var(--line)}
+.inv li:first-child{border-top:0}
+.inv li:before{content:"";position:absolute;left:3px;top:18px;width:7px;height:7px;background:var(--dusty);transform:rotate(45deg)}
+.inv li span{display:block;font:600 17px "Cormorant Garamond",serif;color:var(--ink)}
+
+/* wishes */
+.wish{max-width:340px;margin:0 auto;text-align:left}
+.wish input,.wish textarea,.card input{width:100%;border:1px solid #efc9dc;border-radius:14px;padding:13px;font:400 16px "DM Sans";background:#fff;color:var(--ink);margin-bottom:10px}
+.wlist{max-width:340px;margin:18px auto 0;text-align:left;max-height:260px;overflow:auto}
+.wlist div{padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.wlist b{display:block;font:600 18px "Cormorant Garamond",serif;color:var(--wine)}
+.foot{font-size:11px;color:#b48aa2;letter-spacing:.08em;padding:22px 20px 0}
+.credit{margin:34px auto 0;padding:26px 16px 130px;max-width:340px;border-top:1px solid var(--line);text-align:center}
+.credit .by{font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px}
+.credit .co{display:block;font:600 22px "Cormorant Garamond",serif;color:var(--wine)}
+.credit .sv{display:block;font-size:12px;color:var(--muted);letter-spacing:.06em;margin:2px 0 12px}
+.credit .desc{font:400 15px/1.6 "Cormorant Garamond",serif;color:#7d4a67;margin:0 auto 14px;max-width:310px}
+.credit .pill{padding:8px 16px;font-size:12px;margin:4px 3px 0}
+.credit .ct{font-size:12px;color:var(--muted);margin-top:14px}
+.credit .ctoggle{display:block;margin:18px auto 0;background:none;border:0;border-bottom:1px solid var(--gold);padding:2px 2px;color:var(--wine);font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer}
+.credit.off .cbody{display:none}
+.credit.off{margin-top:10px;padding-top:12px}
+
+
+/* rose decorations */
+.rd{position:absolute!important;z-index:0!important;width:var(--s,130px);height:var(--s,130px);pointer-events:none;filter:drop-shadow(0 6px 8px rgba(142,19,86,.2))}
+.rd.tl{top:-30px;left:-30px;transform:rotate(135deg)}
+.rd.tr{top:-30px;right:-30px;transform:rotate(225deg)}
+.rd.bl{bottom:-30px;left:-30px;transform:rotate(45deg)}
+.rd.br{bottom:-30px;right:-30px;transform:rotate(315deg)}
+.rd.big{--s:160px}
+.rd.sm{--s:84px}
+.rs{width:34px;height:34px;display:inline-block}
+.ph .im .rs{width:60px;height:60px}
+.gal figure .rs{width:64px;height:64px}
+
+/* reveal */
+.rv{opacity:0;transform:translate3d(0,22px,0);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.75,.25,1);transition-delay:calc(var(--d,0)*85ms)}
+.rv.in{opacity:1;transform:none}
+
+/* dock, strip, swipe hint */
+.swipe{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;display:flex;flex-direction:column;align-items:center;color:var(--wine);font-size:12px;font-weight:500;letter-spacing:.06em;pointer-events:none;opacity:0;transition:opacity .5s}
+.swipe.show{opacity:1}
+.swipe i{display:block;width:12px;height:12px;border-top:2px solid var(--dusty);border-left:2px solid var(--dusty);transform:rotate(45deg);animation:up 1.6s ease-in-out infinite;opacity:0}
+.swipe i:nth-child(2){animation-delay:.25s;margin-top:-4px}
+.swipe span{margin-top:6px}
+@keyframes up{0%{opacity:0;transform:translateY(8px) rotate(45deg)}50%{opacity:1}100%{opacity:0;transform:translateY(-8px) rotate(45deg)}}
+.dock{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);z-index:10;display:none;grid-template-columns:repeat(5,1fr);padding:10px 8px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,247,251,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s}
+.dock.show{display:grid}
+.dock.hide{transform:translate(-50%,calc(100% + 24px));visibility:hidden;transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s}
+.dock button:not(.dtab){display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;color:var(--wine);font-size:12px;font-weight:700;cursor:pointer;padding:4px 6px;text-align:center;line-height:1.2;justify-content:flex-start}
+.dock em{font-style:normal;font-size:18px}
+.dock .dtab{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:84px;height:28px;padding:0;background:none;border:0}
+.dock .dtab::before{content:"";position:absolute;left:50%;top:9px;width:48px;height:6px;margin-left:-24px;border-radius:6px;background:#eaa7c7}
+.playing #dMusic em{display:inline-block;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.strip{position:fixed;left:50%;bottom:0;transform:translate(-50%,calc(100% + 36px));width:100%;max-width:480px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:9px;padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px));border:0;border-top:1px solid #efc9dc;border-radius:22px 22px 0 0;background:rgba(255,247,251,.97);box-shadow:0 -10px 28px rgba(142,19,86,.16);color:var(--wine);cursor:pointer;visibility:hidden;pointer-events:none;transition:transform .45s cubic-bezier(.6,0,.2,1) .1s,visibility 0s .6s}
+.strip .grab{width:46px;height:5px;border-radius:5px;background:linear-gradient(90deg,#f0b6d2,#c2257a,#f0b6d2)}
+.strip .lbl{display:inline-flex;align-items:center;gap:6px;font:700 11.5px/1 "DM Sans";letter-spacing:.2em;text-transform:uppercase}
+.strip.show{transform:translate(-50%,0);visibility:visible;pointer-events:auto;transition:transform .45s cubic-bezier(.6,0,.2,1) .1s,visibility 0s}
+
+/* popups */
+#sheet,#wsheet,#wform{position:fixed;inset:0;z-index:30;background:rgba(110,10,64,.3);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+#sheet.up,#wsheet.up,#wform.up{visibility:visible;opacity:1}
+.card{width:100%;max-width:480px;background:var(--card);border-radius:24px 24px 0 0;padding:28px 24px calc(24px + env(safe-area-inset-bottom,0px));transform:translate3d(0,36px,0);transition:transform .35s cubic-bezier(.2,.75,.25,1)}
+#sheet.up .card,#wsheet.up .card,#wform.up .card{transform:none}
+#wform .wish{margin:0 auto}
+#wsheet .wl2{max-height:55vh;overflow:auto;text-align:left;margin-top:6px}
+#wsheet .wl2 div{padding:12px 0;border-top:1px solid var(--line);font-size:14px;word-break:break-word}
+#wsheet .wl2 b{display:block;font:600 18px "Cormorant Garamond",serif;color:var(--wine)}
+#wsheet .wl2 .empty{border:0;text-align:center;color:var(--muted);padding:24px 0}
+.card h2{font:500 34px "Cormorant Garamond",serif;color:var(--wine);margin:0 0 4px;text-align:center}
+.card p{text-align:center;font-size:13px;color:var(--muted);margin:0 0 16px}
+.card label{display:block;font-size:13px;font-weight:700;color:var(--wine);margin:12px 0 6px}
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch button{border:1px solid var(--line);border-radius:99px;padding:12px;background:#fff;color:var(--wine);font-weight:700;font-size:14px;cursor:pointer}
+.ch #by{background:#e3f5e6;color:#2f6b3f;border-color:#a9d8b5}.ch #by.sel{background:#8fd19e;color:#17441f}
+.ch #bn{background:#fde6e5;color:#b3261e;border-color:#f1a9a5}.ch #bn.sel{background:#f6c9c7;color:#8f2822}
+.go{width:100%;margin-top:18px}
+.msg{text-align:center;font-size:13px;color:var(--muted);min-height:20px;margin-top:10px}
+.x{display:block;margin:10px auto 0;background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer}
+.petal{position:fixed;top:-30px;z-index:15;pointer-events:none;color:#e48ab6;opacity:.75;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--dr),110vh,0) rotate(480deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.rv{opacity:1!important;transform:none!important}}
+</style>
+<style id="elegant">
+/* ===== Elegant refinement: same palette, quieter and more refined ===== */
+:root{--hair:#e6cf9f;--soft:#f4dce8}
+.phone{box-shadow:0 0 70px #8e135622}
+
+/* typography: more air, finer tracking */
+.small{font-size:11px;letter-spacing:.34em;color:var(--muted);margin-bottom:14px}
+h2.h{font:500 27px/1.2 "Cormorant Garamond",serif;text-transform:uppercase;letter-spacing:.2em;margin:0 0 10px;padding-bottom:16px;position:relative}
+h2.h:after{content:"";position:absolute;left:50%;bottom:0;width:44px;height:1px;margin-left:-22px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.lead{font:italic 400 18px/1.8 "Cormorant Garamond",serif;color:#7d4a67}
+.cv-top{font-size:11px;letter-spacing:.34em}
+.cv-title{font:400 23px/1.2 "Cormorant Garamond",serif;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.cv-script{font-size:46px;white-space:nowrap}
+.cv-date{font-size:17px;letter-spacing:.34em;font-weight:400}
+.hero-names{font-size:56px;animation:none;background:linear-gradient(180deg,#b3126a,#8e1356);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 2px 6px #8e135616)}
+.s-hero .serif{font-size:20px!important;letter-spacing:.4em!important;font-weight:400}
+
+/* softer, cleaner section backdrops */
+section{padding:84px 28px}
+section:before{background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.7),transparent 62%)}
+section:not(.s-hero):not(.s-verse):after{content:"";position:absolute;top:0;left:50%;width:84px;height:1px;margin-left:-42px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:1}
+.s-hero{background:linear-gradient(180deg,#fff5fa,#fdeef5 70%,#fbe6f0)}
+
+/* roses: gentle accents, never louder than the text */
+.rd{opacity:.55;filter:drop-shadow(0 4px 6px rgba(142,19,86,.1))}
+.rd{--s:112px}.rd.big{--s:140px}.rd.sm{--s:72px}
+section:not(.s-hero) .rd.bl,section:not(.s-hero) .rd.br{display:none}
+.rs{width:26px;height:26px;opacity:.85}
+.orn{gap:14px;margin:20px 0}
+.orn:before,.orn:after{width:64px;background:linear-gradient(90deg,transparent,var(--gold))}
+
+/* buttons: slim, tracked, refined */
+.btn{padding:14px 36px;font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;background:linear-gradient(180deg,#a8195e,#8e1356);border:1px solid var(--gold);box-shadow:0 0 0 3px #fff3,0 8px 18px #8e135624}
+.pill{padding:10px 22px;font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid var(--gold);color:var(--wine)}
+.credit .pill{padding:8px 14px;font-size:10px}
+
+/* ribbon titles become hairline captions */
+.rib{background:none;color:var(--wine);box-shadow:none;border:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);border-radius:0;padding:13px 22px;margin-bottom:28px;font:500 14px "Cormorant Garamond",serif;font-style:normal;letter-spacing:.2em;white-space:nowrap;text-transform:uppercase}
+
+/* cards: crisp corners, double hairline */
+.frame-card{border-radius:3px;padding:40px 22px 34px;border:1px solid var(--gold);background:#fff;box-shadow:inset 0 0 0 6px #fff,inset 0 0 0 7px var(--hair),0 14px 34px #8e13561a}
+.frame-card .jt{font-size:50px}
+.frame-card .jk{font:500 17px/1.2 "Cormorant Garamond",serif;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px}
+.greet{font-size:17px;margin-bottom:18px;color:var(--muted)}
+.host{font:600 16px/1.6 "Cormorant Garamond",serif;letter-spacing:.1em}
+.inv-text{font-size:16.5px;line-height:1.75;margin-top:22px}
+.banner{border-radius:3px;border:1px solid var(--gold);padding:28px 16px;background:linear-gradient(160deg,#a8195e,#8e1356);box-shadow:inset 0 0 0 5px #8e1356,inset 0 0 0 6px #e6cf9fcc,0 14px 30px #8e135624;margin-top:30px}
+.banner .n{font:500 16px/1.6 "Cormorant Garamond",serif;letter-spacing:.14em}
+.banner .a{font-size:34px;margin:6px 0}
+
+.cd div,.prog div,.inv-card,.gal figure{border-radius:3px}
+.cd div{border-color:var(--hair);padding:16px 4px;box-shadow:none}
+.cd b{font-weight:400;font-size:32px}
+.cd span{font-size:10px;letter-spacing:.24em;text-transform:uppercase}
+.info .row{border-top:1px solid var(--hair);padding:20px 0}
+.info .lab{font-size:10.5px;letter-spacing:.34em;font-weight:500;color:var(--dusty);margin-bottom:8px}
+.info .val{font-size:22px;font-weight:500}
+.prog div{border:1px solid var(--hair);padding:26px 10px;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 6px var(--soft),0 10px 22px #8e13561a}
+.prog em{font-size:28px;margin-bottom:10px}
+.prog b{font-size:15px;font-weight:600;letter-spacing:.22em}
+.prog span{font-size:17px;font-weight:500}
+.inv-card{border-color:var(--hair);box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 6px var(--soft),0 10px 24px #8e13561a;padding:16px 24px}
+.inv li{border-top-color:var(--hair);padding:13px 0 13px 24px}
+.inv li:before{width:5px;height:5px;background:var(--gold);top:21px}
+.inv li span{font-weight:500;font-size:17.5px;letter-spacing:.02em}
+.script.thanks{font-size:56px;margin:18px 0 30px}
+.gal{gap:12px}
+.gal figure{box-shadow:0 0 0 5px #fff,0 0 0 6px var(--hair)}
+.gal{padding:6px}
+.ph{padding:10px;box-shadow:0 18px 36px rgba(60,0,35,.5)}
+.foot{letter-spacing:.34em;font-size:10.5px;color:#a8789a;padding-top:26px}
+
+/* forms & popups */
+.wish input,.wish textarea,.card input{border:1px solid var(--hair);border-radius:4px;padding:14px}
+.card{border-radius:18px 18px 0 0;border-top:1px solid var(--gold)}
+.card h2{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:26px}
+.card label{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500}
+.ch button{font-weight:500;letter-spacing:.1em}
+.wlist div,#wsheet .wl2 div{border-top-color:var(--hair)}
+
+/* dock & strip */
+.dock{border-top:1px solid var(--hair);background:rgba(255,247,251,.96)}
+.dock button:not(.dtab){font-size:10.5px;font-weight:500;letter-spacing:.08em}
+.dock .dtab::before{background:var(--hair)}
+.strip{border-top:1px solid var(--hair)}
+.strip .lbl{font-weight:500;letter-spacing:.3em}
+
+/* photo behind the invitation card */
+#invite.has-bg{background:linear-gradient(rgba(255,246,250,.28),rgba(255,246,250,.18)),var(--cbg) center/cover no-repeat}
+#invite.has-bg:before{display:none}
+#invite.has-bg .rd{display:none}
+#invite.has-bg .frame-card{background:rgba(255,255,255,.94);box-shadow:inset 0 0 0 6px #fff,inset 0 0 0 7px var(--hair),0 18px 40px rgba(60,0,35,.28)}
+/* photo-style opening cover */
+#cover{justify-content:flex-end;align-items:stretch;padding:0;color:#fff;
+ background:linear-gradient(180deg,rgba(24,0,14,.5) 0%,rgba(24,0,14,.08) 28%,rgba(24,0,14,.18) 52%,rgba(24,0,14,.86) 100%),var(--cphoto,linear-gradient(160deg,#6a1244,#8e1356 48%,#3a0a26)) center/cover no-repeat}
+#cover .cv-top{position:absolute;top:30px;left:26px;font:500 19px/1.2 "Cormorant Garamond",serif;letter-spacing:.02em;text-transform:none;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+#cover .cv-bottom{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 22px 58px}
+#cover .cv-names{margin:0;font:300 clamp(30px,9.4vw,46px)/1.1 "Cormorant Garamond",serif;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+#cover .cv-date{margin:34px 0 22px;font:500 17px "Cormorant Garamond",serif;letter-spacing:.12em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+#cover .btn{background:rgba(255,255,255,.06);color:#fff;border:1px solid #fff;border-radius:999px;padding:12px 34px;font:600 17px "Cormorant Garamond",serif;letter-spacing:.03em;text-transform:none;box-shadow:none;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#cover .btn:disabled{opacity:.8}
+#cover.opening .cv-bottom{opacity:.0;transition:opacity .5s}
+/* envelope inside the An-Naba' slide: one continuous, overlapping timeline */
+#cover.opening .cv-bottom{opacity:0;transition:opacity .45s}
+.pstage{position:relative;width:100%;max-width:400px;margin:0 auto}
+.evx{position:absolute;left:50%;bottom:6px;width:34em;height:23.6em;margin-left:-17em;font-size:calc(min(62vw,258px)/34);opacity:0;will-change:transform,opacity}
+.evb{z-index:0}.evf{z-index:3}
+.pstage.play .evx{animation:evx 3.1s linear both}
+@keyframes evx{0%{opacity:0;transform:translateY(34px) scale(.9);animation-timing-function:cubic-bezier(.2,.8,.25,1)}
+ 21%{opacity:1;transform:none}
+ 80%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.5,0,.8,.5)}
+ 100%{opacity:0;transform:translateY(46px) scale(.93)}}
+.ev-back{position:absolute;inset:0;border-radius:.6em;background:linear-gradient(160deg,#d9aca3,#c99489);box-shadow:0 1.2em 2.6em rgba(0,0,0,.45)}
+.evx .shp{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ev-flap{height:58%!important;transform-origin:top}
+.pstage.play .evf .ev-flap{animation:flapShut .4s cubic-bezier(.5,0,.8,.6) .9s both}
+@keyframes flapShut{to{transform:scaleY(0)}}
+.ev-flap2{transform:scaleY(0)}
+.pstage.play .ev-flap2{animation:flapUp .5s cubic-bezier(.2,.7,.3,1) 1.3s both}
+@keyframes flapUp{from{transform:scaleY(0)}to{transform:scaleY(-1)}}
+.ev-seal{position:absolute;left:50%;top:58%;width:5em;height:5em;margin:-2.5em 0 0 -2.5em;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,#f5e0d6,#dcb4a6 55%,#bb8c7c);font:700 1.5em "Cormorant Garamond",serif;color:#a9806f;box-shadow:0 .3em .7em rgba(100,55,45,.4)}
+.pstage.play .ev-seal{animation:sealOut .35s ease .8s both}
+@keyframes sealOut{to{opacity:0;transform:scale(.6)}}
+.pstage .pair{position:relative;z-index:1;transform-origin:50% 100%;transform:translateY(-26%) scale(.5);opacity:0;will-change:transform,opacity}
+.pstage.play .pair{animation:pairFlow 3s linear 1.3s both,pairIn .35s ease 1.3s both}
+@keyframes pairIn{to{opacity:1}}
+@keyframes pairFlow{0%{transform:translateY(-26%) scale(.5);animation-timing-function:cubic-bezier(.2,.8,.25,1)}
+ 46%{transform:translateY(-58%) scale(.5);animation-timing-function:cubic-bezier(.55,0,.2,1)}
+ 100%{transform:none}}
+.s-verse .vb,.s-verse .vline{opacity:0}
+.pstage.play~.vb,.pstage.play~.vline{animation:vfade 1s ease 4.3s both}
+@keyframes vfade{to{opacity:1}}
+/* An-Naba' slide is the first full screen after opening */
+.s-verse{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+.s-verse .pair{width:100%}
+/* verse section text */
+.s-verse{padding:84px 20px 90px}
+.s-verse .vt{font:400 38px/1.15 "Cormorant Garamond",serif;color:#fff;margin:0 0 10px;letter-spacing:.02em;text-transform:none;padding:0;text-shadow:0 2px 14px rgba(40,0,25,.45)}
+.s-verse .vt:after{display:none}
+.s-verse .vq{font:italic 500 16px/1.7 "Cormorant Garamond",serif;color:#fff;margin:0 auto 38px;max-width:380px;text-shadow:0 1px 10px rgba(40,0,25,.5)}
+.s-verse .vt.vb{margin:42px 0 18px;font-size:34px}
+.s-verse .vline{width:120px;height:1px;margin:0 auto;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.85}
+/* calmer motion */
+.rv{transform:translate3d(0,14px,0);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.75,.25,1)}
+.petal{opacity:.5}
+</style>
+</head>
+<body class="lock">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="i-flower" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="12" cy="6.2" rx="2.8" ry="4.2"/><ellipse cx="12" cy="6.2" rx="2.8" ry="4.2" transform="rotate(72 12 12)"/><ellipse cx="12" cy="6.2" rx="2.8" ry="4.2" transform="rotate(144 12 12)"/><ellipse cx="12" cy="6.2" rx="2.8" ry="4.2" transform="rotate(216 12 12)"/><ellipse cx="12" cy="6.2" rx="2.8" ry="4.2" transform="rotate(288 12 12)"/></g><circle cx="12" cy="12" r="2.2" fill="#fff"/></symbol>
+<symbol id="i-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M9 3.5h6l1.8 2.6L12 10 7.2 6.1z"/></symbol>
+<symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+<symbol id="i-rose" viewBox="0 0 120 120"><path d="M60 86V112" stroke="#6f8f68" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M60 102C50 102 38 98 30 88C44 86 56 90 60 102Z" fill="#8fae88" stroke="#5f7f5a" stroke-width="1"/><path d="M60 98C70 98 82 94 90 84C76 82 64 86 60 98Z" fill="#7fa079" stroke="#5f7f5a" stroke-width="1"/><path d="M30 56C24 40 36 26 54 28C66 22 84 28 90 44C94 56 88 62 86 58L34 60Z" fill="#f7c6db" stroke="#b3126a" stroke-width="1" stroke-linejoin="round"/><path d="M32 56C30 74 44 88 60 88C76 88 90 74 88 56C80 62 68 64 60 64C52 64 40 62 32 56Z" fill="#ee9bbd" stroke="#b3126a" stroke-width="1"/><path d="M40 54C38 40 50 32 62 33C76 34 84 44 80 56C74 62 48 62 40 54Z" fill="#e0709f" stroke="#b3126a" stroke-width="1"/><path d="M50 52C48 42 58 38 65 41C72 44 72 54 66 56C58 58 52 56 50 52Z" fill="#c94a83" stroke="#8e1356" stroke-width="1"/><path d="M58 50C56 46 62 44 64 48C66 52 60 54 58 50Z" fill="none" stroke="#6e0a40" stroke-width="1"/><path d="M44 68C52 75 68 75 76 68M38 61C49 69 71 69 82 61" fill="none" stroke="#b3126a" stroke-width="1" stroke-linecap="round"/><path d="M44 40C50 34 58 33 64 34" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="i-rose-line" viewBox="0 0 120 120"><path d="M58 50C55 45 62 42 65 46C68 51 61 55 57 52C52 48 55 40 63 39C72 39 75 49 70 55"/><path d="M44 52C41 40 51 31 63 32C76 33 84 43 80 55"/><path d="M36 56C31 46 36 36 46 34"/><path d="M84 52C89 44 86 36 78 32"/><path d="M34 58C33 74 45 87 60 87C75 87 87 74 86 58"/><path d="M44 66C52 74 68 74 76 66"/><path d="M39 60C49 69 71 69 81 60"/><path d="M50 78C56 82 64 82 70 78"/><path d="M60 87V112"/><path d="M60 100C50 100 38 96 32 88C44 86 56 90 60 100Z"/><path d="M60 96C70 96 82 92 88 84C76 82 64 86 60 96Z"/><path d="M60 100L40 92M60 96L80 88"/></symbol>
+<symbol id="i-petal" viewBox="0 0 24 24"><path d="M12 2C6 6 4 13 12 22C20 13 18 6 12 2Z" fill="currentColor"/></symbol>
+</svg>
+<div class="phone">
+
+<div id="cover">
+  <div class="cv-top">Jemputan Majlis Kahwin</div>
+  <div class="cv-bottom">
+    <h1 class="cv-names">Juliza &amp; Rugasan</h1>
+    <div class="cv-date">27 / 12 / 2026</div>
+    <button class="btn" id="open" type="button">Buka Jemputan</button>
+  </div>
+</div>
+
+<section class="s-verse" id="verse">
+  <h2 class="vt">An-Naba' 78:8</h2>
+  <p class="vq">&ldquo;Dan kami menciptakan kamu berpasang-pasangan.&rdquo;</p>
+  <div class="pstage" id="pstage">
+    <div class="evx evb" aria-hidden="true"><div class="ev-back"></div><svg class="shp ev-flap ev-flap2" viewBox="0 0 340 137" preserveAspectRatio="none"><defs><linearGradient id="gFl3" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#efcdc5"/><stop offset="1" stop-color="#dfaea4"/></linearGradient></defs><path d="M0 0H340L170 137Z" fill="url(#gFl3)"/></svg></div>
+    <div class="pair" id="pair"></div>
+    <div class="evx evf" aria-hidden="true">
+      <svg class="shp ev-pocket" viewBox="0 0 340 236" preserveAspectRatio="none"><defs><linearGradient id="gPk2" x1=".15" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#e3bbb2"/><stop offset="1" stop-color="#d19f94"/></linearGradient></defs><path d="M0 0L170 122.7L340 0V230A6 6 0 0 1 334 236H6A6 6 0 0 1 0 230Z" fill="url(#gPk2)"/></svg>
+      <svg class="shp ev-flap" viewBox="0 0 340 137" preserveAspectRatio="none"><defs><linearGradient id="gFl2" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#efcdc5"/><stop offset="1" stop-color="#dfaea4"/></linearGradient></defs><path d="M0 0H340L170 137Z" fill="url(#gFl2)"/></svg>
+      <div class="ev-seal">J&amp;R</div>
+    </div>
+  </div>
+  <h2 class="vt vb">Pasangan Pengantin</h2>
+  <div class="vline"></div>
+</section>
+
+<section class="s-hero"><svg class="rd tr big" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd bl big" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br sm" aria-hidden="true"><use href="#i-rose"/></svg>
+  <p class="small">Jemputan Majlis Kahwin</p>
+  <div class="script hero-names">Juliza &amp; Rugasan</div>
+  <p class="serif" style="font-size:28px;letter-spacing:.12em;color:var(--wine);margin:6px 0 10px">27 / 12 / 2026</p>
+  <div class="orn"><svg class="rs" aria-hidden="true"><use href="#i-rose"/></svg></div>
+</section>
+
+<section class="alt" id="invite"><svg class="rd tl" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br" aria-hidden="true"><use href="#i-rose"/></svg>
+  <div class="frame-card">
+    <p class="jt">Jemputan</p>
+    <p class="jk">Majlis Kahwin</p>
+    <p class="greet">Assalamualaikum &amp; Salam Sejahtera</p>
+    <div class="host">MEJ. (Kr) HALID BIN HARUN</div>
+    <div class="amp2">&amp;</div>
+    <div class="host">PUAN ANNURA BINTI UNDONG.</div>
+    <p class="inv-text">Dengan penuh santun &amp; kesyukuran mengalu-alukan kehadiran<br><b>YB. Dato' Seri/ YB/ YBhg. Tan Sri/ Datuk/ Dato'/ Datin/ YBrs. Dr./ Tuan/ Puan</b> seisi keluarga ke majlis persandingan puteri kami yang dikasihi</p>
+  </div>
+  <div class="banner">
+    <div class="n">CIK JULIZA BINTI HALID</div>
+    <div class="a">&amp;</div>
+    <div class="n">EN. RUGASAN BIN HJ. KUMBAYAT</div>
+  </div>
+</section>
+
+<section><svg class="rd tr" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd bl" aria-hidden="true"><use href="#i-rose"/></svg>
+  <h2 class="h">Butiran Majlis</h2>
+  <p class="lead">Menuju hari yang dinanti</p>
+  <div class="cd" id="cd"><div><b>0</b><span>Hari</span></div><div><b>0</b><span>Jam</span></div><div><b>0</b><span>Minit</span></div><div><b>0</b><span>Saat</span></div></div>
+  <div class="info">
+    <div class="row"><div class="lab">TARIKH</div><div class="val">Ahad, 27 December 2026</div></div>
+    <div class="row"><div class="lab">MAJLIS</div><div class="val">Majlis Persandingan</div></div>
+    <div class="row"><div class="lab">TEMPAT</div><div class="val">Dewan Serbaguna SJK (C) Pai Sheng, Kunak, Sabah.</div></div>
+  </div>
+  <a class="pill" id="mapLink" target="_blank" rel="noopener" href="https://maps.app.goo.gl/3G3w91CCZ6aBCp6f8" style="margin-top:14px">Google Maps</a>
+</section>
+
+<section class="alt"><svg class="rd tl" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br" aria-hidden="true"><use href="#i-rose"/></svg>
+  <div class="rib">Tentatif Atur Cara Majlis</div>
+  <div class="prog">
+    <div><em><svg class="ic" aria-hidden="true"><use href="#i-ring"/></svg></em><b>AKAD NIKAH</b><span>Petang<br>3.30 Ptg</span></div>
+    <div><em><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg></em><b>SANDING</b><span>7.30 Mlm –<br>11.30 Mlm</span></div>
+  </div>
+</section>
+
+<section><svg class="rd tr" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd bl" aria-hidden="true"><use href="#i-rose"/></svg>
+  <h2 class="h">Abadikan Cinta</h2>
+  <div class="orn"><svg class="rs" aria-hidden="true"><use href="#i-rose"/></svg></div>
+  <div class="gal" id="gal"></div>
+</section>
+
+<section class="alt"><svg class="rd tl" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br" aria-hidden="true"><use href="#i-rose"/></svg>
+  <p class="lead" style="font-style:italic;font-weight:500">Semoga dengan kehadiran dan doa hadirin dapat memberkati dan menyerikan majlis kami.</p>
+  <div class="script thanks">Terima kasih.</div>
+  <button class="btn" type="button" id="rsvpBtn2">Sahkan Kehadiran</button>
+</section>
+
+<section><svg class="rd tr" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd bl" aria-hidden="true"><use href="#i-rose"/></svg>
+  <div class="rib">Turut Mengundang.</div>
+  <div class="inv-card"><ul class="inv" id="inv"></ul></div>
+</section>
+
+<section class="alt" id="ucapan"><svg class="rd tl" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br" aria-hidden="true"><use href="#i-rose"/></svg>
+  <h2 class="h">Ucapan</h2>
+  <p class="lead">Sila luangkan sedikit masa untuk menyampaikan salam mesra dan ucapan selamat.</p>
+  <button class="btn" type="button" id="wishBtn">Ucapan</button>
+  <div class="wlist" id="wlist"></div>
+</section>
+
+<section><svg class="rd tr" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd bl" aria-hidden="true"><use href="#i-rose"/></svg>
+  <h2 class="h">Terima Kasih</h2>
+  <div class="orn"><svg class="rs" aria-hidden="true"><use href="#i-rose"/></svg></div>
+  <p class="lead">Kami amat berbesar hati sekiranya anda sudi hadir pada hari yang penuh bahagia ini. Terima kasih atas segala kata-kata, doa dan perhatian yang diberikan.</p>
+  <div class="foot">JULIZA &amp; RUGASAN · 27.12.2026</div>
+  <div class="credit" id="credit">
+    <div class="cbody">
+    <p class="by">Website crafted with care by</p>
+    <b class="co">Digital Solution Semenyih</b>
+    <span class="sv">Web Design &amp; Digital Solutions</span>
+    <p class="desc">Digital Solution Semenyih menawarkan sewaan &amp; custom RSVP, Web Design, Canva Design, tempahan kad jemputan fizikal serta pelbagai software dan solusi digital untuk merealisasikan idea anda!</p>
+    <a class="pill" target="_blank" rel="noopener" href="https://www.instagram.com/digitalsolution_semenyih?gwpx=MXN1NXB1cnViamlhNw%3D%3D&amp;utm_source=qr">Instagram</a>
+    <a class="pill" target="_blank" rel="noopener" href="https://www.tiktok.com/@digitalsolution_semenyih?_r=1&amp;_t=ZS-9BZ7lGTDSGy">TikTok</a>
+    <a class="pill" target="_blank" rel="noopener" href="https://wa.me/601114815700">WhatsApp</a>
+    <div class="ct">Contact: 011-1481-5700 (Whatsapp)</div>
+    </div>
+    <button type="button" class="ctoggle" id="adToggle" aria-expanded="true">Hide Ads</button>
+  </div>
+</section>
+
+<div class="swipe" id="swipe" aria-hidden="true"><i></i><i></i><span>Leret ke atas</span></div>
+
+<nav class="dock" id="dock">
+  <button type="button" class="dtab" id="dTab" aria-label="Sembunyi menu"></button>
+  <button type="button" id="dRsvp"><em><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></em>RSVP</button>
+  <button type="button" id="dMap"><em><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></em>Lokasi</button>
+  <button type="button" id="dWish"><em><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></em>Ucapan</button>
+  <button type="button" id="dList"><em><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg></em>Senarai Ucapan</button>
+  <button type="button" id="dMusic"><em><svg class="ic" aria-hidden="true"><use href="#i-music"/></svg></em><span id="mTxt">Music</span></button>
+</nav>
+<button type="button" class="strip" id="strip" aria-label="Leret ke atas untuk membuka menu"><span class="grab"></span><span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg>Leret ke atas</span></button>
+
+<div id="sheet" aria-hidden="true">
+  <div class="card">
+    <h2>RSVP</h2>
+    <p>Sila isi nama dan pilih status kehadiran anda.</p>
+    <label for="nm">Nama</label>
+    <input id="nm" maxlength="80" autocomplete="name" placeholder="Nama penuh anda">
+    <label>Kehadiran</label>
+    <div class="ch"><button type="button" id="by">Hadir</button><button type="button" id="bn">Tidak hadir</button></div>
+    <button type="button" class="btn go" id="go">Hantar RSVP</button>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="x" id="cl" type="button">Tutup</button>
+  </div>
+</div>
+
+<div id="wform" aria-hidden="true">
+  <div class="card">
+    <h2>Ucapan</h2>
+    <p>Sila luangkan sedikit masa untuk menyampaikan salam mesra dan ucapan selamat.</p>
+    <form class="wish" id="wish">
+      <input id="wn" maxlength="60" placeholder="Nama" autocomplete="name" required>
+      <textarea id="wm" rows="4" maxlength="300" placeholder="Ucapan" required></textarea>
+      <button class="btn" type="submit" style="width:100%">Kirim</button>
+    </form>
+    <div class="msg" id="wmsg" role="status"></div>
+    <button class="x" id="wfcl" type="button">Tutup</button>
+  </div>
+</div>
+
+<div id="wsheet" aria-hidden="true">
+  <div class="card">
+    <h2>Senarai Ucapan</h2>
+    <p>Ucapan daripada tetamu.</p>
+    <div class="wl2" id="wl2"></div>
+    <button class="x" id="wcl" type="button">Tutup</button>
+  </div>
+</div>
+</div>
+
+<audio id="bg" preload="auto" loop></audio>
+<script>
+const $=id=>document.getElementById(id);
+/* ===== CONFIG ===== */
+const EVENT=new Date("2026-12-27T15:30:00+08:00");
+const MUSIC_SRC="";            // e.g. "music.mp3"
+const PHOTOS=[];               // 2 portrait photos in white frames, e.g. "img/p1.jpg"
+const CARD_BG="";              // photo behind the invitation card, e.g. "img/card-bg.jpg" (empty = soft pink)
+const COVER_BG="";             // opening photo, e.g. "img/cover.jpg" (empty = deep rose gradient)
+const VERSE_BG="";             // optional full-width background photo behind the framed photos, e.g. "img/bg.jpg"
+const GALLERY=[];              // 4 photos, e.g. ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg"]
+const RSVP_API="";             // paste your own Google Apps Script web-app URL here for this couple
+const INVITERS=[
+  "KK Mohd @ Sakaran & Isteri",
+  "KAN Misran & Isteri",
+  "Cgu Abdullah & Isteri",
+  "Haris Harun & Isteri",
+  "Imam Bishan & Isteri",
+  "Abd Hamid & Isteri",
+  "Abd Wahab & Isteri",
+  "Rajis & Isteri",
+  "Jais & Isteri",
+  "Abd Rasid @ Anza",
+  "Azwan & Isteri"
+];
+/* ================== */
+const FL='<svg class="rs" aria-hidden="true"><use href="#i-rose"/></svg>';
+const FP='<svg class="ic fill" aria-hidden="true"><use href="#i-petal"/></svg>';
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// countdown
+function tick(){let d=Math.max(0,EVENT-new Date());const v=[864e5,36e5,6e4,1e3].map(u=>{const n=Math.floor(d/u);d-=n*u;return n});document.querySelectorAll("#cd b").forEach((e,i)=>e.textContent=v[i])}
+tick();setInterval(tick,1000);
+
+// turut mengundang
+INVITERS.forEach(n=>{const li=document.createElement("li"),s=document.createElement("span");s.textContent=n;li.appendChild(s);$("inv").appendChild(li)});
+
+// framed photos
+$("pair").innerHTML=[0,1].map(i=>'<figure class="ph"><div class="im">'+(PHOTOS[i]?'<img alt="Juliza & Rugasan" src="'+PHOTOS[i]+'">':FL)+"</div></figure>").join("");
+if(CARD_BG)$("invite").style.setProperty("--cbg","url('"+CARD_BG+"')"),$("invite").classList.add("has-bg");
+if(COVER_BG)$("cover").style.setProperty("--cphoto","url('"+COVER_BG+"')");
+if(VERSE_BG)$("verse").style.setProperty("--vbg","url('"+VERSE_BG+"')");
+
+// gallery
+$("gal").innerHTML=Array.from({length:4},(_,i)=>GALLERY[i]?'<figure><img loading="lazy" alt="Foto '+(i+1)+'" src="'+GALLERY[i]+'"></figure>':'<figure>'+FL+'</figure>').join("");
+
+// wishes (saved to Google Sheet tab "Ucapan" via RSVP_API)
+const wl=$("wlist"),wl2=$("wl2");let wishes=[];
+function mk(w){const d=document.createElement("div"),b=document.createElement("b");b.textContent=w.n;d.appendChild(b);d.appendChild(document.createTextNode(w.m));return d}
+function renderWishes(){wl2.innerHTML="";if(wl)wl.innerHTML="";if(!wishes.length){const d=document.createElement("div");d.className="empty";d.textContent="Belum ada ucapan.";wl2.appendChild(d);return}wishes.forEach(w=>{wl2.appendChild(mk(w));if(wl)wl.appendChild(mk(w))})}
+function jsonp(params,ok,fail){
+  const cb="cb_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const s=document.createElement("script");let to;
+  function done(){clearTimeout(to);delete window[cb];s.remove()}
+  window[cb]=r=>{done();ok(r)};
+  s.onerror=()=>{done();fail()};
+  to=setTimeout(()=>{done();fail()},15000);
+  s.src=RSVP_API+"?"+new URLSearchParams(Object.assign({callback:cb},params)).toString();
+  document.head.appendChild(s);
+}
+function loadWishes(){
+  if(!RSVP_API)return;
+  jsonp({action:"wishes"},r=>{if(r&&r.ok){wishes=r.rows;renderWishes()}},()=>{});
+}
+renderWishes();loadWishes();
+let wsending=false;
+$("wish").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=$("wn").value.trim(),m=$("wm").value.trim(),f=e.target,btn=f.querySelector("button[type=submit]");
+  if(!n||!m)return;
+  if(!RSVP_API){$("wmsg").textContent="Ucapan belum disambungkan. Sila hubungi tuan rumah.";return}
+  if(wsending)return;wsending=true;btn.disabled=true;btn.textContent="Menghantar...";
+  const fin=()=>{wsending=false;btn.disabled=false;btn.textContent="Kirim"};
+  jsonp({action:"wish",name:n,msg:m,id:"wish-"+Date.now()+"-"+Math.random().toString(36).slice(2,9)},
+    r=>{fin();if(r&&r.ok){wishes.unshift({n:n,m:m});renderWishes();f.reset();$("wmsg").textContent="Ucapan diterima! Terima kasih atas ucapan anda."}else $("wmsg").textContent="Maaf, ucapan tidak berjaya dihantar. Sila cuba lagi."},
+    ()=>{fin();$("wmsg").textContent="Sambungan gagal. Semak senarai ucapan dahulu sebelum menghantar semula."});
+});
+// refresh list whenever "Senarai Ucapan" is opened
+$("dList").addEventListener("click",loadWishes);
+
+// music
+const bg=$("bg");if(MUSIC_SRC)bg.src=MUSIC_SRC;
+function upd(){$("mTxt").textContent=bg.paused?"Music: OFF":"Music: ON";document.body.classList.toggle("playing",!bg.paused)}
+$("dMusic").addEventListener("click",()=>{bg.paused?bg.play().catch(()=>{}):bg.pause()});
+bg.addEventListener("play",upd);bg.addEventListener("pause",upd);
+
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("in",e.isIntersecting)),{threshold:.25});
+document.querySelectorAll("section").forEach(s=>{let i=0;[...s.children].forEach(el=>{if(el.classList.contains("rd"))return;el.classList.add("rv");el.style.setProperty("--d",Math.min(i++,5));io.observe(el)})});
+
+// open invitation
+let opened=false,hintUntil=0;
+function openInv(){
+  if(opened)return;opened=true;
+  $("cover").classList.add("opening");const ps=$("pstage");setTimeout(()=>ps.classList.add("play"),1000);
+  $("open").disabled=true;$("open").textContent="Jemputan dibuka";
+  bg.volume=.45;if(MUSIC_SRC)bg.play().catch(()=>{});upd();
+  setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
+  if(!reduce)for(let i=0;i<14;i++){const p=document.createElement("span");p.className="petal";p.innerHTML=FP;p.style.left=Math.random()*100+"vw";p.style.fontSize=(10+Math.random()*12)+"px";p.style.setProperty("--dr",(Math.random()*140-70)+"px");p.style.animationDuration=(7+Math.random()*7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),15000)}
+}
+$("open").addEventListener("click",openInv);
+
+// auto-scroll: starts by itself; a touch/wheel pauses it, then it resumes after a short idle
+const sheet=$("sheet"),wsheet=$("wsheet"),wform=$("wform"),PX=90;
+const anySheet=()=>sheet.classList.contains("up")||wsheet.classList.contains("up")||wform.classList.contains("up");
+let auto=false,pos=0,last=0,idleT=null,fin=false,raf=0,ty=null;
+const sc=()=>document.scrollingElement||document.documentElement;
+const maxS=()=>Math.max(0,sc().scrollHeight-innerHeight);
+function setAuto(v){
+  if(!v){auto=false;cancelAnimationFrame(raf);last=0;return}
+  if(auto||fin||!opened||reduce||anySheet())return;
+  if(maxS()<=1||sc().scrollTop>=maxS()-2){fin=true;return}
+  auto=true;pos=sc().scrollTop;last=0;raf=requestAnimationFrame(step);
+}
+function step(t){
+  if(!auto)return;if(!last)last=t;
+  const dt=Math.min(t-last,34);last=t;
+  pos=Math.min(maxS(),pos+PX*dt/1000);sc().scrollTop=pos;
+  if(pos>=maxS()-1){fin=true;setAuto(false);return}
+  raf=requestAnimationFrame(step);
+}
+function pauseAuto(){if(!opened)return;setAuto(false);clearTimeout(idleT);fin=false;if(!reduce&&!anySheet())idleT=setTimeout(()=>setAuto(true),1800)}
+const chrome=el=>el&&el.closest&&el.closest("#dock,#strip,#sheet,#wsheet,#wform,#cover");
+addEventListener("wheel",e=>{if(opened&&!chrome(e.target)&&e.deltaY)pauseAuto()},{passive:true});
+addEventListener("touchstart",e=>{ty=(opened&&!chrome(e.target))?e.touches[0].clientY:null},{passive:true});
+addEventListener("touchmove",e=>{if(ty!=null&&Math.abs(e.touches[0].clientY-ty)>12){pauseAuto();ty=null}},{passive:true});
+addEventListener("keydown",e=>{if(opened&&["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].includes(e.key))pauseAuto()});
+addEventListener("scroll",()=>$("swipe").classList.toggle("show",opened&&(Date.now()<hintUntil||scrollY<80)),{passive:true});
+
+// dock hide / strip
+(function(){
+  const dock=$("dock"),strip=$("strip");let y0=null;
+  const setHide=h=>{dock.classList.toggle("hide",h);strip.classList.toggle("show",h)};
+  $("dTab").addEventListener("click",()=>setHide(true));
+  dock.addEventListener("touchstart",e=>{y0=e.touches[0].clientY},{passive:true});
+  dock.addEventListener("touchend",e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>28)setHide(true);y0=null},{passive:true});
+  strip.addEventListener("click",()=>setHide(false));
+  strip.addEventListener("touchstart",e=>{y0=e.touches[0].clientY},{passive:true});
+  strip.addEventListener("touchend",e=>{if(y0!==null&&e.changedTouches[0].clientY-y0<-28)setHide(false);y0=null},{passive:true});
+})();
+
+// rsvp sheet
+function show(v){sheet.classList.toggle("up",v);sheet.setAttribute("aria-hidden",String(!v));document.body.style.overflow=v?"hidden":"";if(v){setAuto(false);clearTimeout(idleT);setTimeout(()=>$("nm").focus({preventScroll:true}),180)}else if(opened)pauseAuto()}
+["dRsvp","rsvpBtn2"].forEach(i=>$(i).addEventListener("click",()=>show(true)));
+$("cl").addEventListener("click",()=>show(false));
+sheet.addEventListener("click",e=>{if(e.target===sheet)show(false)});
+$("dMap").addEventListener("click",()=>{pauseAuto();document.querySelector(".info").scrollIntoView({behavior:"smooth",block:"center"})});
+
+// ucapan popups
+function showW(v){wsheet.classList.toggle("up",v);wsheet.setAttribute("aria-hidden",String(!v));document.body.style.overflow=v?"hidden":"";if(v){setAuto(false);clearTimeout(idleT)}else if(opened)pauseAuto()}
+function showF(v){wform.classList.toggle("up",v);wform.setAttribute("aria-hidden",String(!v));document.body.style.overflow=v?"hidden":"";if(v){$("wmsg").textContent="";setAuto(false);clearTimeout(idleT);setTimeout(()=>$("wn").focus({preventScroll:true}),180)}else if(opened)pauseAuto()}
+$("wishBtn").addEventListener("click",()=>showF(true));
+$("wfcl").addEventListener("click",()=>showF(false));
+wform.addEventListener("click",e=>{if(e.target===wform)showF(false)});
+$("dList").addEventListener("click",()=>showW(true));
+$("wcl").addEventListener("click",()=>showW(false));
+wsheet.addEventListener("click",e=>{if(e.target===wsheet)showW(false)});
+$("dWish").addEventListener("click",()=>{pauseAuto();$("ucapan").scrollIntoView({behavior:"smooth",block:"start"})});
+
+// hide / show credit
+$("adToggle").addEventListener("click",()=>{const off=$("credit").classList.toggle("off");$("adToggle").textContent=off?"Show Ads":"Hide Ads";$("adToggle").setAttribute("aria-expanded",String(!off))});
+
+let sel=null;
+function ch(v){sel=v;$("by").classList.toggle("sel",v==="Hadir");$("bn").classList.toggle("sel",v==="Tidak hadir")}
+$("by").addEventListener("click",()=>ch("Hadir"));$("bn").addEventListener("click",()=>ch("Tidak hadir"));
+let sending=false;
+$("go").addEventListener("click",()=>{
+  const name=$("nm").value.trim();
+  if(!name||!sel){$("msg").textContent="Sila isi nama dan pilih kehadiran.";return}
+  if(!RSVP_API){$("msg").textContent="RSVP belum disambungkan. Sila hubungi tuan rumah.";return}
+  if(sending)return;sending=true;
+  const btn=$("go");btn.disabled=true;btn.textContent="Menghantar...";$("msg").textContent="Sedang menghantar RSVP anda...";
+  const cb="rsvp_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const q=new URLSearchParams({action:"rsvp",name:name,status:sel,id:"guest-"+Date.now()+"-"+Math.random().toString(36).slice(2,9),callback:cb});
+  const s=document.createElement("script");let to;
+  function done(){clearTimeout(to);delete window[cb];s.remove();sending=false;btn.disabled=false;btn.textContent="Hantar RSVP"}
+  window[cb]=r=>{done();if(r&&r.ok){$("msg").textContent="Terima kasih! RSVP anda telah berjaya direkodkan.";$("nm").value="";sel=null;$("by").classList.remove("sel");$("bn").classList.remove("sel")}else $("msg").textContent="Maaf, RSVP tidak berjaya disimpan. Sila cuba lagi."};
+  s.onerror=()=>{done();$("msg").textContent="Pengesahan tidak diterima. Semak senarai RSVP dahulu sebelum menghantar semula supaya rekod tidak berganda."};
+  to=setTimeout(()=>{done();$("msg").textContent="Sambungan mengambil masa terlalu lama. Sila cuba lagi."},15000);
+  s.src=RSVP_API+"?"+q.toString();document.head.appendChild(s);
+});
+</script>
+</body>
+</html>
