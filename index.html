@@ -93,6 +93,9 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 .banner .a{font:400 32px/1.1 "Parisienne",cursive;color:#ffe3a3;margin:2px 0}
 
 /* photos on photo background */
+.s-invite-head{min-height:100dvh;display:flex;align-items:flex-end;justify-content:center;padding:42px 24px 76px;background:linear-gradient(180deg,rgba(30,8,22,.12) 10%,rgba(30,8,22,.12) 45%,rgba(30,8,22,.68) 100%),url("client%20image/Image%201.png") center 28%/cover no-repeat;color:#fff}
+.s-invite-head:before{display:none}
+.s-invite-head-title{font:italic 500 clamp(34px,9vw,46px)/1.1 "Cormorant Garamond",serif;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.55);letter-spacing:.02em}
 .s-verse{background:linear-gradient(160deg,#a8195e,#6e0a40);color:#fff;padding:80px 20px 90px}
 .s-verse:before{content:"";position:absolute;inset:0;background:var(--vbg,none) center/cover no-repeat;filter:blur(3px);transform:scale(1.06);z-index:0}
 .s-verse:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(80,8,48,.3),rgba(80,8,48,.45));z-index:0}
@@ -433,6 +436,10 @@ body.lock .phone>section{visibility:hidden}
   </div>
 </div>
 
+<section class="s-invite-head" aria-label="Kepala jemputan">
+  <div class="s-invite-head-title">Dijemput Hadir</div>
+</section>
+
 <section class="s-verse" id="verse">
   <h2 class="vt">An-Naba' 78:8</h2>
   <p class="vq">&ldquo;Dan kami menciptakan kamu berpasang-pasangan.&rdquo;</p>
@@ -561,7 +568,6 @@ body.lock .phone>section{visibility:hidden}
 
 <div id="sheet" aria-hidden="true">
   <div class="card">
-    <div class="rsvp-photo-head" role="img" aria-label="Foto pasangan pengantin"><span>Dijemput Hadir</span></div>
     <h2>RSVP</h2>
     <p>Sila isi nama dan pilih status kehadiran anda.</p>
     <p class="rsvp-deadline">Mohon sahkan kehadiran anda sebelum atau pada tarikh akhir berikut:<strong>25 Disember 2026</strong><span class="rsvp-deadline-note">Terima kasih atas kerjasama anda.</span></p>
