@@ -4,7 +4,8 @@ A reusable invitation and RSVP website template based on the original SeJasmin R
 
 ## Files
 - `index.html` — invitation page and RSVP form.
-- `admin.html` — password-protected RSVP dashboard with search, CSV export, print and delete.
+- `juliza-admin.html` — dedicated Juliza & Rugasan RSVP admin panel.
+- `admin-template-hidden.html` — archived copy of the previous generic admin dashboard.
 - `Code.gs` — Google Apps Script backend.
 - `README.md` — setup guide.
 
@@ -14,7 +15,7 @@ A reusable invitation and RSVP website template based on the original SeJasmin R
 3. Open Google Apps Script, paste `Code.gs`, and replace `PASTE_YOUR_GOOGLE_SHEET_ID_HERE` with your new spreadsheet ID.
 4. In Apps Script **Project Settings → Script Properties**, add `ADMIN_KEY` with a strong password for the admin dashboard.
 5. Deploy the script as a Web App (**Execute as: Me**, **Who has access: Anyone**) and copy its `/exec` URL.
-6. Paste that URL into the `RSVP_API` constant in `index.html` and the `API` constant in `admin.html`.
+6. Paste that URL into the `RSVP_API` constant in `index.html` and the `API` constant in `juliza-admin.html`.
 7. Enable GitHub Pages from **Settings → Pages → Deploy from a branch → main → /(root)**.
 
 ## Important
@@ -26,10 +27,10 @@ A reusable invitation and RSVP website template based on the original SeJasmin R
 
 ## Live pages
 - **Guest RSVP page:** https://darknight1028.github.io/RSVP-Client-Template/
-- **Admin dashboard:** https://darknight1028.github.io/RSVP-Client-Template/admin.html
+- **Admin dashboard:** https://darknight1028.github.io/RSVP-Client-Template/juliza-admin.html
 
 The admin dashboard is password-protected. Set the `ADMIN_KEY` Script Property in your own Apps Script deployment before using it.
 
 ## Source files
 - Guest invitation: `index.html`
-- Admin dashboard: `admin.html`
+- Admin dashboard: `juliza-admin.html`
