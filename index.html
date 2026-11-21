@@ -673,8 +673,11 @@ $("dList").addEventListener("click",loadWishes);
 
 // music
 const bg=$("bg");if(MUSIC_SRC)bg.src=MUSIC_SRC;
+let musicSeeked=false;
+function seekMusicStart(){if(musicSeeked)return;if(bg.readyState>=1){bg.currentTime=8;musicSeeked=true}else bg.addEventListener("loadedmetadata",()=>{if(!musicSeeked){bg.currentTime=8;musicSeeked=true}},{once:true})}
+function playMusic(){seekMusicStart();bg.play().catch(()=>{})}
 function upd(){$("mTxt").textContent=bg.paused?"Music: OFF":"Music: ON";document.body.classList.toggle("playing",!bg.paused)}
-$("dMusic").addEventListener("click",()=>{bg.paused?bg.play().catch(()=>{}):bg.pause()});
+$("dMusic").addEventListener("click",()=>{bg.paused?playMusic():bg.pause()});
 bg.addEventListener("play",upd);bg.addEventListener("pause",upd);
 
 // scroll reveal
@@ -687,7 +690,7 @@ function openInv(){
   if(opened)return;opened=true;
   $("cover").classList.add("opening");const ps=$("pstage");setTimeout(()=>ps.classList.add("play"),1000);
   $("open").disabled=true;$("open").textContent="Jemputan dibuka";
-  bg.volume=.45;if(MUSIC_SRC)bg.play().catch(()=>{});upd();
+  bg.volume=.45;if(MUSIC_SRC)playMusic();upd();
   setTimeout(()=>{$("cover").classList.add("gone");document.body.classList.remove("lock");scrollTo(0,0);$("dock").classList.add("show");$("swipe").classList.add("show");hintUntil=Date.now()+7000;setTimeout(()=>{$("cover").style.display="none"},1200);if(!reduce)setTimeout(()=>setAuto(true),5800)},600);
   if(!reduce)for(let i=0;i<14;i++){const p=document.createElement("span");p.className="petal";p.innerHTML=FP;p.style.left=Math.random()*100+"vw";p.style.fontSize=(10+Math.random()*12)+"px";p.style.setProperty("--dr",(Math.random()*140-70)+"px");p.style.animationDuration=(7+Math.random()*7)+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),15000)}
 }
