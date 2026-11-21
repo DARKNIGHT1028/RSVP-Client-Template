@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>RSVP Guest List - Juliza &amp; Rugasan</title>
+<title>Senarai Tetamu RSVP - Juliza &amp; Rugasan</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&family=Parisienne&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:light;--page:#f1cfe0;--panel:#fdeef5;--card:#fff8fb;--dusty:#b3126a;--wine:#8e1356;--gold:#c9a24f;--ink:#4a2038;--muted:#8d5f78;--line:#f0cde0;--hair:#e6cf9f}
@@ -101,24 +101,24 @@ input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;widt
 <body>
 <div class="panel">
   <p class="script">Juliza &amp; Rugasan</p>
-  <h1>RSVP Guest List</h1>
-  <p class="sub">Admin Dashboard · Majlis Perkahwinan</p>
+  <h1>Senarai Tetamu RSVP</h1>
+  <p class="sub">Panel Pentadbir · Majlis Perkahwinan</p>
   <div class="orn" aria-hidden="true">✦✧✦</div>
 
   <form class="box" id="lf">
-    <label for="key">Admin access key</label>
+    <label for="key">Kunci akses pentadbir</label>
     <div class="row">
-      <input type="password" id="key" placeholder="Masukkan admin key" autocomplete="current-password" required>
+      <input type="password" id="key" placeholder="Masukkan kunci pentadbir" autocomplete="current-password" required>
       <button type="button" class="out" id="sh">Papar</button>
     </div>
-    <button class="btn" type="submit" id="lb">Log masuk</button>
-    <p class="hint">Masukkan admin key yang telah ditetapkan dalam Google Apps Script.</p>
+    <button class="btn" type="submit" id="lb">Log Masuk</button>
+    <p class="hint">Masukkan kunci pentadbir yang telah ditetapkan dalam Google Apps Script.</p>
     <div class="msg" id="lm" role="status"></div>
   </form>
 
   <div id="app" class="hidden">
     <div class="stats">
-      <div><b id="sT">0</b><span>Jumlah RSVP</span></div>
+      <div><b id="sT">0</b><span>Jumlah Pengesahan Kehadiran</span></div>
       <div><b id="sY">0</b><span>Hadir</span></div>
       <div><b id="sN">0</b><span>Tidak hadir</span></div>
     </div>
@@ -133,7 +133,7 @@ input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;widt
       <input type="search" id="q" placeholder="Cari nama tetamu..." aria-label="Cari">
       <span class="sp"></span>
       <div class="dl">
-        <button type="button" class="out" id="dl" aria-haspopup="true" aria-expanded="false">Muat turun ▾</button>
+        <button type="button" class="out" id="dl" aria-haspopup="true" aria-expanded="false">Muat Turun ▾</button>
         <div class="menu hidden" id="menu">
           <button type="button" data-t="rsvp" data-format="csv">Senarai tetamu (CSV)</button>
           <button type="button" data-t="rsvp" data-format="pdf">Senarai tetamu (PDF)</button>
@@ -141,8 +141,8 @@ input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;widt
           <button type="button" data-t="wish" data-format="pdf">Senarai ucapan (PDF)</button>
         </div>
       </div>
-      <button type="button" class="out" id="rf">Muat semula</button>
-      <button type="button" class="out" id="lo">Log keluar</button>
+      <button type="button" class="out" id="rf">Muat Semula</button>
+      <button type="button" class="out" id="lo">Log Keluar</button>
     </div>
     <div class="count" id="stat"></div>
     <div id="list" aria-live="polite"></div>
@@ -274,7 +274,7 @@ function pdf(t){
   tbody tr:nth-child(even){background:#fdeff5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}th:first-child,td:first-child{width:7%;text-align:center}th:nth-child(2),td:nth-child(2){width:17%}
   ${guest?"th:nth-child(3),td:nth-child(3){width:48%}th:nth-child(4),td:nth-child(4){width:28%}":"th:nth-child(3),td:nth-child(3){width:23%}th:nth-child(4),td:nth-child(4){width:53%}"}
   .footer{margin-top:10px;font-size:8pt;color:#756b72;text-align:right}@media screen{body{padding:22px;background:#f5f1f3}.sheet{background:white;padding:22px;max-width:1100px;margin:auto;box-shadow:0 2px 14px #0002}.actions{max-width:1100px;margin:0 auto 14px;display:flex;justify-content:flex-end;gap:10px}button{border:0;border-radius:8px;padding:11px 18px;background:#8e1356;color:white;font-size:14px;cursor:pointer}.secondary{background:#756b72}}@media print{.actions{display:none}body{padding:0}.sheet{padding:0}}
-  </style></head><body><div class="actions"><button class="secondary" onclick="window.close()">Tutup</button><button onclick="window.print()">Cetak / Simpan PDF</button></div><main class="sheet"><h1>JULIZA &amp; RUGASAN</h1><h2>${esc(title)}</h2><div class="meta"><span>Majlis Perkahwinan · 27.12.2026</span><span>Jumlah rekod: ${body.length}</span></div><table><thead><tr>${head.map(v=>"<th>"+esc(v)+"</th>").join("")}</tr></thead><tbody>${tableRows||'<tr><td colspan="4">Tiada rekod untuk dipaparkan.</td></tr>'}</tbody></table><div class="footer">Juliza &amp; Rugasan · Laporan Admin</div></main><script>window.addEventListener("load",()=>setTimeout(()=>window.print(),400));<\/script></body></html>`);
+  </style></head><body><div class="actions"><button class="secondary" onclick="window.close()">Tutup</button><button onclick="window.print()">Cetak / Simpan PDF</button></div><main class="sheet"><h1>JULIZA &amp; RUGASAN</h1><h2>${esc(title)}</h2><div class="meta"><span>Majlis Perkahwinan · 27.12.2026</span><span>Jumlah rekod: ${body.length}</span></div><table><thead><tr>${head.map(v=>"<th>"+esc(v)+"</th>").join("")}</tr></thead><tbody>${tableRows||'<tr><td colspan="4">Tiada rekod untuk dipaparkan.</td></tr>'}</tbody></table><div class="footer">Juliza &amp; Rugasan · Laporan Pentadbir</div></main><script>window.addEventListener("load",()=>setTimeout(()=>window.print(),400));<\/script></body></html>`);
   win.document.close();
 }
 const menu=$("menu");
@@ -287,17 +287,17 @@ menu.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
 document.addEventListener("click",()=>toggleMenu(false));
 
 /* misc buttons */
-$("sh").addEventListener("click",()=>{const p=$("key").type==="password";$("key").type=p?"text":"password";$("sh").textContent=p?"Sembunyi":"Papar"});
-$("rf").addEventListener("click",()=>load().catch(()=>{$("stat").textContent="Gagal memuatkan."}));
+$("sh").addEventListener("click",()=>{const p=$("key").type==="password";$("key").type=p?"text":"password";$("sh").textContent=p?"Sembunyikan":"Papar"});
+$("rf").addEventListener("click",()=>load().catch(()=>{$("stat").textContent="Gagal memuatkan data."}));
 $("lo").addEventListener("click",()=>{try{sessionStorage.removeItem("jr_admin")}catch(e){}KEY="";$("app").classList.add("hidden");$("lf").classList.remove("hidden");$("key").value=""});
 
 async function start(k,auto){
-  if(!API){$("lm").textContent="API belum disambungkan. Isi URL Apps Script dalam fail ini.";return}
-  KEY=k;$("lb").disabled=true;$("lb").textContent="Menyemak...";$("lm").textContent="";
+  if(!API){$("lm").textContent="API belum disambungkan. Sila masukkan URL Apps Script dalam fail ini.";return}
+  KEY=k;$("lb").disabled=true;$("lb").textContent="Sedang menyemak...";$("lm").textContent="";
   try{await load();try{sessionStorage.setItem("jr_admin",KEY)}catch(e){}$("lf").classList.add("hidden");$("app").classList.remove("hidden")}
   catch(e){KEY="";try{sessionStorage.removeItem("jr_admin")}catch(x){}
     if(!auto)$("lm").textContent=e.message==="auth"?"Admin key tidak betul.":"Sambungan gagal. Sila cuba lagi."}
-  $("lb").disabled=false;$("lb").textContent="Log masuk";
+  $("lb").disabled=false;$("lb").textContent="Log Masuk";
 }
 $("lf").addEventListener("submit",e=>{e.preventDefault();start($("key").value.trim(),false)});
 if(KEY)start(KEY,true);
