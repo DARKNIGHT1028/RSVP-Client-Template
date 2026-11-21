@@ -165,7 +165,7 @@ input[type=password],input[type=text],input[type=search]{flex:1;min-width:0;widt
 <script>
 const $=id=>document.getElementById(id);
 /* ===== CONFIG ===== */
-const API="";   // same Google Apps Script web-app URL as RSVP_API in the invitation
+const API="https://script.google.com/macros/s/AKfycbw62jq0JnwHAmiOdP8A0jZ3RHiHXrIEE0GmWFw6MUOO00WUt5GNSnS5KPD-meFf08NX/exec";   // same Google Apps Script web-app URL as RSVP_API in the invitation
 /* ================== */
 let KEY="",tab="rsvp",data={rsvp:[],wish:[]},pending=null,busy=false;
 try{KEY=sessionStorage.getItem("jr_admin")||""}catch(e){}
