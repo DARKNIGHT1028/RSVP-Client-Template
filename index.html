@@ -224,6 +224,8 @@ button,a{-webkit-tap-highlight-color:transparent}
 #wsheet .wl2 .empty{border:0;text-align:center;color:var(--muted);padding:24px 0}
 .card h2{font:500 34px "Cormorant Garamond",serif;color:var(--wine);margin:0 0 4px;text-align:center}
 .card p{text-align:center;font-size:13px;color:var(--muted);margin:0 0 16px}
+.rsvp-deadline{max-width:340px;margin:12px auto 18px;padding:11px 14px;border:1px solid var(--gold);border-radius:14px;background:#fff8ec;color:var(--wine);font-size:13px;line-height:1.5;text-align:center}
+.rsvp-deadline strong{display:block;font-size:15px;color:var(--wine)}
 .card label{display:block;font-size:13px;font-weight:700;color:var(--wine);margin:12px 0 6px}
 .ch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ch button{border:1px solid var(--line);border-radius:99px;padding:12px;background:#fff;color:var(--wine);font-weight:700;font-size:14px;cursor:pointer}
@@ -496,6 +498,7 @@ body.lock .phone>section{visibility:hidden}
 <section class="alt"><svg class="rd tl" aria-hidden="true"><use href="#i-rose"/></svg><svg class="rd br" aria-hidden="true"><use href="#i-rose"/></svg>
   <p class="lead" style="font-style:italic;font-weight:500">Semoga dengan kehadiran dan doa hadirin dapat memberkati dan menyerikan majlis kami.</p>
   <div class="script thanks">Terima kasih.</div>
+  <p class="rsvp-deadline">Tarikh akhir pengesahan kehadiran<strong>25 Disember 2026</strong></p>
   <button class="btn" type="button" id="rsvpBtn2">Sahkan Kehadiran</button>
 </section>
 
@@ -556,6 +559,7 @@ body.lock .phone>section{visibility:hidden}
   <div class="card">
     <h2>RSVP</h2>
     <p>Sila isi nama dan pilih status kehadiran anda.</p>
+    <p class="rsvp-deadline">Tarikh akhir pengesahan kehadiran<strong>25 Disember 2026</strong></p>
     <label for="nm">Nama</label>
     <input id="nm" maxlength="80" autocomplete="name" placeholder="Nama penuh anda">
     <label>Kehadiran</label>
