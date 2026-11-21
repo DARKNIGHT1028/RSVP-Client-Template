@@ -24,6 +24,12 @@ A reusable invitation and RSVP website template based on the original SeJasmin R
 - The countdown and calendar export require event-specific configuration before use.
 - Keep the Google Sheet private. The public Web App endpoint accepts guest submissions; do not store sensitive information in this RSVP form.
 
-## Pages
+## Live pages
+- **Guest RSVP page:** https://darknight1028.github.io/RSVP-Client-Template/
+- **Admin dashboard:** https://darknight1028.github.io/RSVP-Client-Template/admin.html
+
+The admin dashboard is password-protected. Set the `ADMIN_KEY` Script Property in your own Apps Script deployment before using it.
+
+## Source files
 - Guest invitation: `index.html`
 - Admin dashboard: `admin.html`
