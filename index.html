@@ -144,7 +144,8 @@ h2.h{font:500 34px/1.1 "Cormorant Garamond",serif;color:var(--wine);margin:0 0 6
 .credit .desc{font:400 15px/1.6 "Cormorant Garamond",serif;color:#7d4a67;margin:0 auto 14px;max-width:310px}
 .credit .pill{padding:8px 16px;font-size:12px;margin:4px 3px 0}
 .credit .ct{font-size:12px;color:var(--muted);margin-top:14px}
-.credit .ctoggle{display:block;margin:18px auto 0;background:none;border:0;border-bottom:1px solid var(--gold);padding:2px 2px;color:var(--wine);font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer}
+.credit .ctoggle{display:block;margin:18px auto 0;min-width:124px;min-height:42px;padding:10px 22px;border:1px solid var(--gold);border-radius:999px;background:#fff;color:var(--wine);font:700 12px "DM Sans";letter-spacing:.08em;cursor:pointer;touch-action:manipulation;box-shadow:0 3px 12px rgba(110,10,64,.08)}
+.credit .ctoggle:active{transform:scale(.97)}
 .credit.off .cbody{display:none}
 .credit.off{margin-top:10px;padding-top:12px}
 
@@ -515,7 +516,7 @@ body.lock .phone>section{visibility:hidden}
   <div class="orn"><svg class="rs" aria-hidden="true"><use href="#i-rose"/></svg></div>
   <p class="lead">Kami amat berbesar hati sekiranya anda sudi hadir pada hari yang penuh bahagia ini. Terima kasih atas segala kata-kata, doa dan perhatian yang diberikan.</p>
   <div class="foot">JULIZA &amp; RUGASAN · 27.12.2026</div>
-  <div class="credit" id="credit">
+  <div class="credit off" id="credit">
     <div class="cbody">
     <p class="by">Website crafted with care by</p>
     <b class="co">Digital Solution Semenyih</b>
@@ -526,7 +527,7 @@ body.lock .phone>section{visibility:hidden}
     <a class="pill" target="_blank" rel="noopener" href="https://wa.me/601114815700">WhatsApp</a>
     <div class="ct">Contact: 011-1481-5700 (Whatsapp)</div>
     </div>
-    <button type="button" class="ctoggle" id="adToggle" aria-expanded="true">Hide Ads</button>
+    <button type="button" class="ctoggle" id="adToggle" aria-expanded="false">Show Ads</button>
   </div>
 </section>
 
